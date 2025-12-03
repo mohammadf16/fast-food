@@ -1,0 +1,258 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
+import { Menu, X, Phone, Clock, MapPin, ShoppingBag, User, LogIn } from 'lucide-react';
+import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { getTotalItems } = useCart();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'Hjem', href: '/' },
+    { name: 'Menu', href: '/menu' },
+    { name: 'Byg Pizza', href: '/pizza-builder' },
+    { name: 'Om Os', href: '/about' },
+    { name: 'Galleri', href: '/gallery' },
+    { name: 'Kontakt', href: '/contact' },
+  ];
+
+  return (
+    <>
+      {/* Top Bar */}
+      <motion.div
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="hidden lg:block bg-[#1A1A2E] text-white py-2"
+      >
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-sm">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <Phone size={14} className="text-[#F5A623]" />
+              <span>+45 98 12 34 56</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock size={14} className="text-[#F5A623]" />
+              <span>Man-Søn: 11:00 - 22:00</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin size={14} className="text-[#F5A623]" />
+            <span>Hadsundvej 11, 9000 Aalborg</span>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Main Navbar */}
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-white/98 backdrop-blur-md shadow-xl border-b border-gray-200 py-3'
+            : 'bg-gradient-to-b from-black/50 to-transparent py-5'
+        }`}
+        style={{ top: isScrolled ? 0 : 'auto' }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <Link to="/">
+              <motion.div
+                className="flex items-center gap-3"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+              <div className="w-12 h-12 bg-gradient-to-br from-[#D4382C] to-[#F5A623] rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-xl">S</span>
+              </div>
+              <div>
+                <h1 className={`text-2xl font-bold ${isScrolled ? 'text-[#1A1A2E]' : 'text-white'}`}>
+                  Sorrento
+                </h1>
+                <p className={`text-xs ${isScrolled ? 'text-[#D4382C]' : 'text-[#F5A623]'}`}>
+                  PIZZA AALBORG
+                </p>
+              </div>
+              </motion.div>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-8">
+              {navLinks.map((link, index) => (
+                <Link key={link.name} to={link.href}>
+                  <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`relative font-medium transition-colors ${
+                    isScrolled ? 'text-[#1A1A2E] hover:text-[#D4382C]' : 'text-white hover:text-[#F5A623]'
+                  }`}
+                  whileHover={{ y: -2 }}
+                >
+                  {link.name}
+                    <motion.span
+                      className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D4382C]"
+                      whileHover={{ width: '100%' }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </motion.div>
+                </Link>
+              ))}
+              
+              {/* Cart Button */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate('/cart')}
+                className="relative p-2"
+              >
+                <ShoppingBag 
+                  className={isScrolled ? 'text-[#1A1A2E]' : 'text-white'} 
+                  size={24} 
+                />
+                {getTotalItems() > 0 && (
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                  >
+                    {getTotalItems()}
+                  </motion.span>
+                )}
+              </motion.button>
+              {/* Auth Button */}
+              {user ? (
+                <Link to="/profile">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-full border-2 ${
+                      isScrolled
+                        ? 'border-primary text-primary hover:bg-primary hover:text-white'
+                        : 'border-white text-white hover:bg-white hover:text-primary'
+                    } transition-colors`}
+                  >
+                    <User size={18} />
+                    <span className="font-medium">{user.name.split(' ')[0]}</span>
+                  </motion.div>
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-full border-2 ${
+                      isScrolled
+                        ? 'border-primary text-primary hover:bg-primary hover:text-white'
+                        : 'border-white text-white hover:bg-white hover:text-primary'
+                    } transition-colors`}
+                  >
+                    <LogIn size={18} />
+                    <span className="font-medium">Log Ind</span>
+                  </motion.div>
+                </Link>
+              )}
+              <Link to="/menu">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-gradient-to-r from-[#D4382C] to-[#F5A623] text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-shadow"
+                >
+                  Bestil Nu
+                </motion.div>
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setIsOpen(!isOpen)}
+              className={`lg:hidden p-2 rounded-lg ${isScrolled ? 'text-[#1A1A2E]' : 'text-white'}`}
+            >
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
+            </motion.button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden bg-white/95 backdrop-blur-md border-t"
+            >
+              <div className="px-6 py-4 space-y-4">
+                {navLinks.map((link, index) => (
+                  <motion.a
+                    key={link.name}
+                    href={link.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    onClick={() => setIsOpen(false)}
+                    className="block text-[#1A1A2E] font-medium py-2 hover:text-[#D4382C] transition-colors"
+                  >
+                    {link.name}
+                  </motion.a>
+                ))}
+                {user ? (
+                  <Link to="/profile" onClick={() => setIsOpen(false)}>
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className="flex items-center gap-2 text-[#1A1A2E] font-medium py-2 hover:text-[#D4382C] transition-colors"
+                    >
+                      <User size={18} />
+                      Min Profil
+                    </motion.div>
+                  </Link>
+                ) : (
+                  <Link to="/login" onClick={() => setIsOpen(false)}>
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className="flex items-center gap-2 text-[#1A1A2E] font-medium py-2 hover:text-[#D4382C] transition-colors"
+                    >
+                      <LogIn size={18} />
+                      Log Ind
+                    </motion.div>
+                  </Link>
+                )}
+                <Link to="/menu" onClick={() => setIsOpen(false)}>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="block bg-gradient-to-r from-[#D4382C] to-[#F5A623] text-white text-center px-6 py-3 rounded-full font-semibold"
+                  >
+                    Bestil Nu
+                  </motion.div>
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.nav>
+    </>
+  );
+};
+
+export default Navbar;
