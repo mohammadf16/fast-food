@@ -132,7 +132,7 @@ Contributions are welcome! Feel free to submit a Pull Request.
 
 ## 📄 License
 
-MIT License
+Mohammadf16 License
 
 ---
 
