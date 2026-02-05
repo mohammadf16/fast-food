@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Flame, Leaf, Star, ShoppingCart, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -14,9 +14,10 @@ interface MenuItem {
   isSpicy?: boolean;
   isVegan?: boolean;
   isPopular?: boolean;
+  isActive?: boolean;
 }
 
-const menuItems: MenuItem[] = [
+const defaultMenuItems: MenuItem[] = [
   {
     id: 1,
     name: 'Margherita',
@@ -94,6 +95,7 @@ const categories = ['Alle', 'Klassiske', 'Specialiteter', 'Vegansk'];
 
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState('Alle');
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(defaultMenuItems);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [selectedSize, setSelectedSize] = useState<'Small' | 'Medium' | 'Large'>('Medium');
@@ -101,10 +103,23 @@ const Menu = () => {
   const [toastMessage, setToastMessage] = useState('');
   const { addToCart } = useCart();
 
+  // Load menu items from AdminMenuManager (localStorage), with fallback to defaults
+  useEffect(() => {
+    const saved = localStorage.getItem('restaurantMenu');
+    if (saved) {
+      try {
+        const parsed: MenuItem[] = JSON.parse(saved);
+        setMenuItems(parsed);
+      } catch {
+        setMenuItems(defaultMenuItems);
+      }
+    }
+  }, []);
+
   const filteredItems =
     activeCategory === 'Alle'
-      ? menuItems
-      : menuItems.filter((item) => item.category === activeCategory);
+      ? menuItems.filter((item) => item.isActive !== false)
+      : menuItems.filter((item) => item.category === activeCategory && item.isActive !== false);
 
   return (
     <>
@@ -114,8 +129,8 @@ const Menu = () => {
       onClose={() => setShowToast(false)}
       type="success"
     />
-    <section id="menu" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="menu" className="py-20 bg-dark">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -127,14 +142,14 @@ const Menu = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-[#D4382C] font-semibold text-sm uppercase tracking-wider"
+            className="text-primary font-bold text-lg uppercase tracking-wider"
           >
             Vores Menu
           </motion.span>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1A1A2E] mt-2 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
             Lækre Pizzaer
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-white/70 max-w-2xl mx-auto">
             Udforsk vores udvalg af håndlavede pizzaer, lavet med friske
             ingredienser og kærlighed til det italienske køkken
           </p>
@@ -155,8 +170,8 @@ const Menu = () => {
               whileTap={{ scale: 0.95 }}
               className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 activeCategory === category
-                  ? 'bg-gradient-to-r from-[#D4382C] to-[#F5A623] text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ? 'bg-gradient-to-r from-primary to-accent text-dark shadow-lg'
+                  : 'bg-white/5 text-white/70 hover:bg-white/10'
               }`}
             >
               {category}
@@ -177,7 +192,7 @@ const Menu = () => {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 onHoverStart={() => setHoveredItem(item.id)}
                 onHoverEnd={() => setHoveredItem(null)}
-                className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
+                className="group relative bg-black/70 border border-white/10 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
               >
                 {/* Image Container */}
                 <div className="relative h-48 overflow-hidden">
@@ -195,19 +210,19 @@ const Menu = () => {
                   {/* Badges */}
                   <div className="absolute top-4 left-4 flex gap-2">
                     {item.isPopular && (
-                      <span className="bg-[#F5A623] text-white text-xs px-3 py-1 rounded-full flex items-center gap-1">
-                        <Star size={12} className="fill-white" />
+                      <span className="bg-primary text-black text-xs px-3 py-1 rounded-full flex items-center gap-1">
+                        <Star size={12} className="fill-black" />
                         Populær
                       </span>
                     )}
                     {item.isSpicy && (
-                      <span className="bg-[#D4382C] text-white text-xs px-3 py-1 rounded-full flex items-center gap-1">
+                      <span className="bg-white/10 text-primary border border-primary/40 text-xs px-3 py-1 rounded-full flex items-center gap-1">
                         <Flame size={12} />
                         Stærk
                       </span>
                     )}
                     {item.isVegan && (
-                      <span className="bg-green-500 text-white text-xs px-3 py-1 rounded-full flex items-center gap-1">
+                      <span className="bg-white/10 text-primary border border-primary/40 text-xs px-3 py-1 rounded-full flex items-center gap-1">
                         <Leaf size={12} />
                         Vegansk
                       </span>
@@ -219,7 +234,7 @@ const Menu = () => {
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="bg-white text-[#D4382C] font-bold text-lg px-4 py-2 rounded-full shadow-lg"
+                      className="bg-black/70 text-primary border border-primary/40 font-bold text-lg px-4 py-2 rounded-full shadow-lg"
                     >
                       {item.price} kr
                     </motion.div>
@@ -228,17 +243,17 @@ const Menu = () => {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#1A1A2E] mb-2">
+                  <h3 className="text-xl font-bold text-white mb-2">
                     {item.name}
                   </h3>
-                  <p className="text-gray-500 text-sm mb-4">{item.description}</p>
+                  <p className="text-white/70 text-sm mb-4">{item.description}</p>
 
                   {/* Add to Cart Button */}
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setSelectedItem(item)}
-                    className="w-full bg-[#1A1A2E] text-white py-3 rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-[#D4382C] transition-colors duration-300"
+                    className="w-full bg-primary text-black py-3 rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors duration-300"
                   >
                     <ShoppingCart size={18} />
                     Tilføj til kurv
@@ -260,7 +275,7 @@ const Menu = () => {
             href="#"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 border-2 border-[#D4382C] text-[#D4382C] px-8 py-4 rounded-full font-semibold hover:bg-[#D4382C] hover:text-white transition-all duration-300"
+            className="inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-4 rounded-full font-semibold hover:bg-primary hover:text-black transition-all duration-300"
           >
             Se Hele Menuen
             <span>→</span>
@@ -287,7 +302,7 @@ const Menu = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 100 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
+              className="relative w-full max-w-lg bg-[#0b0b12] border border-white/10 rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
             >
               {/* Image Header */}
               <div className="relative h-56 md:h-64">
@@ -303,27 +318,27 @@ const Menu = () => {
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setSelectedItem(null)}
-                  className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-colors"
+                  className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white/20 transition-colors"
                 >
-                  <X size={20} className="text-gray-800" />
+                  <X size={20} className="text-white" />
                 </motion.button>
 
                 {/* Badges on image */}
                 <div className="absolute top-4 left-4 flex gap-2">
                   {selectedItem.isPopular && (
-                    <span className="bg-[#F5A623] text-white text-xs px-3 py-1 rounded-full flex items-center gap-1 shadow-lg">
-                      <Star size={12} className="fill-white" />
+                    <span className="bg-primary text-black text-xs px-3 py-1 rounded-full flex items-center gap-1 shadow-lg">
+                      <Star size={12} className="fill-black" />
                       Populær
                     </span>
                   )}
                   {selectedItem.isSpicy && (
-                    <span className="bg-[#D4382C] text-white text-xs px-3 py-1 rounded-full flex items-center gap-1 shadow-lg">
+                    <span className="bg-primary/20 text-primary border border-primary/40 text-xs px-3 py-1 rounded-full flex items-center gap-1 shadow-lg">
                       <Flame size={12} />
                       Stærk
                     </span>
                   )}
                   {selectedItem.isVegan && (
-                    <span className="bg-green-500 text-white text-xs px-3 py-1 rounded-full flex items-center gap-1 shadow-lg">
+                    <span className="bg-primary/20 text-primary border border-primary/40 text-xs px-3 py-1 rounded-full flex items-center gap-1 shadow-lg">
                       <Leaf size={12} />
                       Vegansk
                     </span>
@@ -343,7 +358,7 @@ const Menu = () => {
               <div className="p-6">
                 {/* Size Selection */}
                 <div className="mb-6">
-                  <h4 className="font-bold text-secondary mb-4 text-lg flex items-center gap-2">
+                  <h4 className="font-bold text-white mb-4 text-lg flex items-center gap-2">
                     <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm">1</span>
                     Vælg Størrelse
                   </h4>
@@ -362,7 +377,7 @@ const Menu = () => {
                           className={`p-4 rounded-2xl border-2 transition-all relative overflow-hidden ${
                             selectedSize === size
                               ? 'border-primary bg-gradient-to-br from-primary/10 to-accent/10 shadow-lg'
-                              : 'border-gray-200 hover:border-primary/50 hover:bg-gray-50'
+                              : 'border-white/10 hover:border-primary/50 hover:bg-white/5'
                           }`}
                         >
                           {selectedSize === size && (
@@ -373,11 +388,11 @@ const Menu = () => {
                           )}
                           <div className="text-center relative z-10">
                             <div className="text-2xl mb-1">{size === 'Small' ? '🍕' : size === 'Medium' ? '🍕' : '🍕'}</div>
-                            <div className={`font-bold ${selectedSize === size ? 'text-primary' : 'text-secondary'}`}>
+                            <div className={`font-bold ${selectedSize === size ? 'text-primary' : 'text-white'}`}>
                               {size === 'Small' ? 'Lille' : size === 'Medium' ? 'Medium' : 'Stor'}
                             </div>
-                            <div className="text-xs text-gray-500 mb-2">{diameter}</div>
-                            <div className={`text-lg font-bold ${selectedSize === size ? 'text-primary' : 'text-secondary'}`}>
+                            <div className="text-xs text-white/60 mb-2">{diameter}</div>
+                            <div className={`text-lg font-bold ${selectedSize === size ? 'text-primary' : 'text-white'}`}>
                               {price} kr
                             </div>
                           </div>
@@ -399,9 +414,9 @@ const Menu = () => {
                 </div>
 
                 {/* Price Summary */}
-                <div className="bg-cream rounded-2xl p-4 mb-6">
+                <div className="bg-white/5 rounded-2xl p-4 mb-6 border border-white/10">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Pris for {selectedSize === 'Small' ? 'lille' : selectedSize === 'Medium' ? 'medium' : 'stor'}:</span>
+                    <span className="text-white/70">Pris for {selectedSize === 'Small' ? 'lille' : selectedSize === 'Medium' ? 'medium' : 'stor'}:</span>
                     <span className="text-2xl font-bold text-primary">
                       {Math.round(selectedItem.price * (selectedSize === 'Large' ? 1.3 : selectedSize === 'Medium' ? 1.15 : 1))} kr
                     </span>
@@ -426,7 +441,7 @@ const Menu = () => {
                     setSelectedItem(null);
                     setSelectedSize('Medium');
                   }}
-                  className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 group"
+                  className="w-full bg-gradient-to-r from-primary to-accent text-dark py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 group"
                 >
                   <ShoppingCart size={22} className="group-hover:scale-110 transition-transform" />
                   Tilføj til Kurv

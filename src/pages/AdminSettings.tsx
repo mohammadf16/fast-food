@@ -120,8 +120,8 @@ const defaultSettings: RestaurantSettings = {
   description: 'Vi laver de bedste pizzaer i Aalborg med friske ingredienser og kærlighed.',
   logo: '',
   favicon: '',
-  primaryColor: '#D4382C',
-  accentColor: '#F5A623',
+  primaryColor: '#D4AF37',
+  accentColor: '#F5D06F',
   
   phone: '+45 98 12 34 56',
   phoneSecondary: '',
@@ -274,7 +274,7 @@ const AdminSettings = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-12">
+    <div className="min-h-screen bg-dark pt-24 pb-12">
       <Toast 
         message={toastMessage}
         isVisible={showToast}
@@ -287,16 +287,16 @@ const AdminSettings = () => {
           <div>
             <Link
               to="/admin"
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-primary transition-colors mb-4"
+              className="inline-flex items-center gap-2 text-white/70 hover:text-primary transition-colors mb-4"
             >
               <ArrowLeft size={20} />
               Tilbage til Dashboard
             </Link>
-            <h1 className="text-3xl font-bold text-secondary flex items-center gap-3">
+            <h1 className="text-3xl font-bold text-white flex items-center gap-3">
               <Settings2 className="text-primary" />
               Restaurant Indstillinger
             </h1>
-            <p className="text-gray-500 mt-1">Tilpas din restaurant og hjemmeside</p>
+            <p className="text-white/70 mt-1">Tilpas din restaurant og hjemmeside</p>
           </div>
           
           <motion.button
@@ -306,8 +306,8 @@ const AdminSettings = () => {
             disabled={!hasChanges}
             className={`px-6 py-3 rounded-xl font-semibold flex items-center gap-2 shadow-lg ${
               hasChanges
-                ? 'bg-gradient-to-r from-primary to-accent text-white'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                ? 'bg-gradient-to-r from-primary to-accent text-dark'
+                : 'bg-white/10 text-white/50 cursor-not-allowed'
             }`}
           >
             <Save size={20} />
@@ -320,17 +320,17 @@ const AdminSettings = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-xl flex items-center gap-3"
+            className="mb-6 p-4 bg-primary/10 border border-primary/30 rounded-xl flex items-center gap-3"
           >
-            <AlertCircle className="text-amber-500" size={20} />
-            <span className="text-amber-700">Du har ændringer der ikke er gemt</span>
+            <AlertCircle className="text-primary" size={20} />
+            <span className="text-white">Du har ændringer der ikke er gemt</span>
           </motion.div>
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Sidebar Tabs */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-lg p-4 sticky top-24">
+            <div className="bg-surface rounded-2xl shadow-lg p-4 sticky top-24 border border-primary/10">
               <nav className="space-y-2">
                 {tabs.map(tab => (
                   <button
@@ -338,8 +338,8 @@ const AdminSettings = () => {
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                       activeTab === tab.id
-                        ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg'
-                        : 'text-gray-600 hover:bg-gray-100'
+                        ? 'bg-gradient-to-r from-primary to-accent text-dark shadow-lg'
+                        : 'text-white/70 hover:bg-white/5'
                     }`}
                   >
                     <tab.icon size={20} />
@@ -356,12 +356,12 @@ const AdminSettings = () => {
               key={activeTab}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="bg-white rounded-2xl shadow-lg p-8"
+              className="bg-surface rounded-2xl shadow-lg p-8 border border-primary/10"
             >
               {/* Vacation/Closed Mode Tab */}
               {activeTab === 'vacation' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <Moon className="text-primary" size={24} />
                     Ferie / Midlertidig Lukket
                   </h2>
@@ -369,19 +369,19 @@ const AdminSettings = () => {
                   {/* Main Toggle */}
                   <div className={`p-6 rounded-2xl border-2 transition-all ${
                     settings.isTemporarilyClosed 
-                      ? 'bg-gradient-to-r from-orange-50 to-red-50 border-orange-300' 
-                      : 'bg-gray-50 border-gray-200'
+                      ? 'bg-primary/10 border-primary/30' 
+                      : 'bg-white/5 border-white/10'
                   }`}>
                     <label className="flex items-center justify-between cursor-pointer">
                       <div className="flex items-center gap-4">
                         <div className={`w-14 h-14 rounded-full flex items-center justify-center ${
-                          settings.isTemporarilyClosed ? 'bg-orange-500' : 'bg-gray-300'
+                          settings.isTemporarilyClosed ? 'bg-primary' : 'bg-white/10'
                         }`}>
                           <Moon size={28} className="text-white" />
                         </div>
                         <div>
-                          <span className="font-bold text-lg text-gray-800">Aktiver Lukket-tilstand</span>
-                          <p className="text-sm text-gray-600">
+                          <span className="font-bold text-lg text-white">Aktiver Lukket-tilstand</span>
+                          <p className="text-sm text-white/70">
                             {settings.isTemporarilyClosed 
                               ? '⚠️ Butikken er i øjeblikket lukket for nye ordrer' 
                               : 'Butikken er åben som normalt'}
@@ -396,7 +396,7 @@ const AdminSettings = () => {
                           className="sr-only"
                         />
                         <div className={`w-16 h-8 rounded-full transition-colors ${
-                          settings.isTemporarilyClosed ? 'bg-orange-500' : 'bg-gray-300'
+                          settings.isTemporarilyClosed ? 'bg-primary/60' : 'bg-white/15'
                         }`}>
                           <div className={`w-6 h-6 bg-white rounded-full shadow-md transform transition-transform mt-1 ${
                             settings.isTemporarilyClosed ? 'translate-x-9' : 'translate-x-1'
@@ -414,14 +414,14 @@ const AdminSettings = () => {
                     >
                       {/* Mode Selection */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-3">
+                        <label className="block text-sm font-medium text-white/80 mb-3">
                           Vælg tilstand
                         </label>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <label className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
                             settings.closedModeType === 'closed'
-                              ? 'border-red-500 bg-red-50'
-                              : 'border-gray-200 hover:border-gray-300'
+                              ? 'border-primary bg-primary/10'
+                              : 'border-white/10 hover:border-primary/40'
                           }`}>
                             <input
                               type="radio"
@@ -432,20 +432,20 @@ const AdminSettings = () => {
                               className="sr-only"
                             />
                             <div className="flex items-center gap-3">
-                              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                                <Moon size={24} className="text-red-600" />
+                              <div className="w-12 h-12 bg-primary/10 border border-primary/30 rounded-full flex items-center justify-center">
+                                <Moon size={24} className="text-primary" />
                               </div>
                               <div>
-                                <p className="font-bold text-gray-800">Helt Lukket</p>
-                                <p className="text-sm text-gray-600">Ingen ordrer accepteres</p>
+                                <p className="font-bold text-white">Helt Lukket</p>
+                                <p className="text-sm text-white/70">Ingen ordrer accepteres</p>
                               </div>
                             </div>
                           </label>
                           
                           <label className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
                             settings.closedModeType === 'preorder'
-                              ? 'border-blue-500 bg-blue-50'
-                              : 'border-gray-200 hover:border-gray-300'
+                              ? 'border-primary bg-primary/10'
+                              : 'border-white/10 hover:border-primary/40'
                           }`}>
                             <input
                               type="radio"
@@ -456,12 +456,12 @@ const AdminSettings = () => {
                               className="sr-only"
                             />
                             <div className="flex items-center gap-3">
-                              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                <ShoppingBag size={24} className="text-blue-600" />
+                              <div className="w-12 h-12 bg-primary/10 border border-primary/30 rounded-full flex items-center justify-center">
+                                <ShoppingBag size={24} className="text-primary" />
                               </div>
                               <div>
-                                <p className="font-bold text-gray-800">Forudbestilling</p>
-                                <p className="text-sm text-gray-600">Kunder kan bestille til senere</p>
+                                <p className="font-bold text-white">Forudbestilling</p>
+                                <p className="text-sm text-white/70">Kunder kan bestille til senere</p>
                               </div>
                             </div>
                           </label>
@@ -471,7 +471,7 @@ const AdminSettings = () => {
                       {/* Custom Messages */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-white/80 mb-2">
                             Overskrift
                           </label>
                           <input
@@ -479,12 +479,12 @@ const AdminSettings = () => {
                             value={settings.closedModeTitle}
                             onChange={(e) => updateSetting('closedModeTitle', e.target.value)}
                             placeholder="F.eks: Vi holder ferie"
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                            className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white placeholder:text-white/40 rounded-xl focus:border-primary focus:outline-none"
                           />
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-white/80 mb-2">
                             Besked til kunder
                           </label>
                           <input
@@ -492,7 +492,7 @@ const AdminSettings = () => {
                             value={settings.closedModeMessage}
                             onChange={(e) => updateSetting('closedModeMessage', e.target.value)}
                             placeholder="F.eks: Vi er tilbage mandag!"
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                            className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white placeholder:text-white/40 rounded-xl focus:border-primary focus:outline-none"
                           />
                         </div>
                       </div>
@@ -500,7 +500,7 @@ const AdminSettings = () => {
                       {/* Reopen Date/Time */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-white/80 mb-2">
                             <Calendar size={16} className="inline mr-1" />
                             Åbner igen (dato)
                           </label>
@@ -508,12 +508,12 @@ const AdminSettings = () => {
                             type="date"
                             value={settings.reopenDate}
                             onChange={(e) => updateSetting('reopenDate', e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                            className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                           />
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-white/80 mb-2">
                             <Clock size={16} className="inline mr-1" />
                             Åbner igen (tid)
                           </label>
@@ -521,15 +521,15 @@ const AdminSettings = () => {
                             type="time"
                             value={settings.reopenTime}
                             onChange={(e) => updateSetting('reopenTime', e.target.value)}
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                            className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                           />
                         </div>
                       </div>
 
                       {/* Preview */}
                       <div className="mt-6">
-                        <p className="text-sm font-medium text-gray-700 mb-3">Forhåndsvisning (Nattehimmel tema):</p>
-                        <div className="relative rounded-2xl overflow-hidden h-80 bg-gradient-to-b from-[#0a0a1a] via-[#1a1a3a] to-[#0d0d2b]">
+                        <p className="text-sm font-medium text-white/80 mb-3">Forhåndsvisning (Nattehimmel tema):</p>
+                        <div className="relative rounded-2xl overflow-hidden h-80 bg-gradient-to-b from-black via-black to-black">
                           {/* Stars */}
                           {[...Array(30)].map((_, i) => (
                             <motion.div
@@ -552,24 +552,24 @@ const AdminSettings = () => {
                             transition={{ duration: 4, repeat: Infinity }}
                             className="absolute top-4 right-6"
                           >
-                            <div className="w-12 h-12 bg-gradient-to-br from-yellow-100 to-yellow-300 rounded-full shadow-lg shadow-yellow-400/30" />
+                            <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full shadow-lg shadow-primary/30" />
                           </motion.div>
                           
                           {/* Content */}
                           <div className="absolute inset-0 flex items-center justify-center p-4">
-                            <div className="bg-indigo-900/80 backdrop-blur rounded-2xl p-6 text-center border border-white/10 max-w-sm">
+                            <div className="bg-black/70 backdrop-blur rounded-2xl p-6 text-center border border-primary/30 max-w-sm">
                               <motion.div
                                 animate={{ rotate: [0, 5, -5, 0] }}
                                 transition={{ duration: 3, repeat: Infinity }}
-                                className="w-16 h-16 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4"
+                                className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4"
                               >
-                                <Moon size={32} className="text-yellow-800" />
+                                <Moon size={32} className="text-black" />
                               </motion.div>
                               
                               <h3 className="text-xl font-bold text-white mb-2">
                                 {settings.closedModeTitle || 'Vi holder lukket'}
                               </h3>
-                              <p className="text-purple-200 text-sm mb-4">
+                              <p className="text-white/70 text-sm mb-4">
                                 {settings.closedModeMessage || 'Vi åbner snart igen!'}
                               </p>
                               
@@ -587,7 +587,7 @@ const AdminSettings = () => {
                               )}
                               
                               {settings.closedModeType === 'preorder' && (
-                                <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg font-medium text-sm">
+                                <button className="bg-primary text-black px-4 py-2 rounded-lg font-medium text-sm">
                                   🛒 Forudbestil
                                 </button>
                               )}
@@ -599,10 +599,10 @@ const AdminSettings = () => {
                   )}
 
                   {!settings.isTemporarilyClosed && (
-                    <div className="p-6 bg-green-50 rounded-xl border border-green-200 text-center">
-                      <CheckCircle size={48} className="text-green-500 mx-auto mb-3" />
-                      <p className="text-green-800 font-medium">Butikken er åben og kører normalt</p>
-                      <p className="text-green-600 text-sm">Aktiver lukket-tilstand når du holder ferie eller lukker midlertidigt</p>
+                    <div className="p-6 bg-primary/10 rounded-xl border border-primary/30 text-center">
+                      <CheckCircle size={48} className="text-primary mx-auto mb-3" />
+                      <p className="text-white font-medium">Butikken er åben og kører normalt</p>
+                      <p className="text-white/70 text-sm">Aktiver lukket-tilstand når du holder ferie eller lukker midlertidigt</p>
                     </div>
                   )}
                 </div>
@@ -611,51 +611,51 @@ const AdminSettings = () => {
               {/* Basic Info Tab */}
               {activeTab === 'basic' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <Store className="text-primary" size={24} />
                     Grundlæggende Information
                   </h2>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Restaurant Navn
                       </label>
                       <input
                         type="text"
                         value={settings.restaurantName}
                         onChange={(e) => updateSetting('restaurantName', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Slogan
                       </label>
                       <input
                         type="text"
                         value={settings.slogan}
                         onChange={(e) => updateSetting('slogan', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Kort Beskrivelse
                     </label>
                     <textarea
                       value={settings.description}
                       onChange={(e) => updateSetting('description', e.target.value)}
                       rows={3}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       <Image size={16} className="inline mr-1" />
                       Logo URL
                     </label>
@@ -664,7 +664,7 @@ const AdminSettings = () => {
                       value={settings.logo}
                       onChange={(e) => updateSetting('logo', e.target.value)}
                       placeholder="https://..."
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white placeholder:text-white/40 rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                 </div>
@@ -673,39 +673,39 @@ const AdminSettings = () => {
               {/* Working Hours Tab */}
               {activeTab === 'hours' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <Clock className="text-primary" size={24} />
                     Åbningstider
                   </h2>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Åbner kl.
                       </label>
                       <input
                         type="time"
                         value={settings.openTime}
                         onChange={(e) => updateSetting('openTime', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Lukker kl.
                       </label>
                       <input
                         type="time"
                         value={settings.closeTime}
                         onChange={(e) => updateSetting('closeTime', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                    <label className="block text-sm font-medium text-white/80 mb-3">
                       Lukkedage
                     </label>
                     <div className="flex flex-wrap gap-2">
@@ -715,21 +715,21 @@ const AdminSettings = () => {
                           onClick={() => toggleClosedDay(day.id)}
                           className={`px-4 py-2 rounded-xl font-medium transition-all ${
                             settings.closedDays.includes(day.id)
-                              ? 'bg-red-100 text-red-600 border-2 border-red-300'
-                              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                              ? 'bg-primary/20 text-primary border-2 border-primary/40'
+                              : 'bg-white/5 text-white/70 hover:bg-white/10'
                           }`}
                         >
                           {day.label}
                         </button>
                       ))}
                     </div>
-                    <p className="text-sm text-gray-500 mt-2">
+                    <p className="text-sm text-white/60 mt-2">
                       Klik på en dag for at markere den som lukket
                     </p>
                   </div>
                   
-                  <div className="p-4 bg-blue-50 rounded-xl">
-                    <div className="flex items-center gap-2 text-blue-700">
+                  <div className="p-4 bg-primary/10 border border-primary/30 rounded-xl">
+                    <div className="flex items-center gap-2 text-primary">
                       <CheckCircle size={20} />
                       <span className="font-medium">
                         Åbningstider: {settings.openTime} - {settings.closeTime}
@@ -742,14 +742,14 @@ const AdminSettings = () => {
               {/* Contact Tab */}
               {activeTab === 'contact' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <Phone className="text-primary" size={24} />
                     Kontakt Information
                   </h2>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         <Phone size={16} className="inline mr-1" />
                         Telefon
                       </label>
@@ -757,12 +757,12 @@ const AdminSettings = () => {
                         type="tel"
                         value={settings.phone}
                         onChange={(e) => updateSetting('phone', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         <Mail size={16} className="inline mr-1" />
                         Email
                       </label>
@@ -770,13 +770,13 @@ const AdminSettings = () => {
                         type="email"
                         value={settings.email}
                         onChange={(e) => updateSetting('email', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       <MapPin size={16} className="inline mr-1" />
                       Adresse
                     </label>
@@ -784,7 +784,7 @@ const AdminSettings = () => {
                       type="text"
                       value={settings.address}
                       onChange={(e) => updateSetting('address', e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                 </div>
@@ -793,37 +793,37 @@ const AdminSettings = () => {
               {/* About Us Tab */}
               {activeTab === 'about' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <FileText className="text-primary" size={24} />
                     Om Os Sektion
                   </h2>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Overskrift
                     </label>
                     <input
                       type="text"
                       value={settings.aboutTitle}
                       onChange={(e) => updateSetting('aboutTitle', e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Beskrivelse
                     </label>
                     <textarea
                       value={settings.aboutDescription}
                       onChange={(e) => updateSetting('aboutDescription', e.target.value)}
                       rows={5}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       <Image size={16} className="inline mr-1" />
                       Billede URL
                     </label>
@@ -832,7 +832,7 @@ const AdminSettings = () => {
                       value={settings.aboutImage}
                       onChange={(e) => updateSetting('aboutImage', e.target.value)}
                       placeholder="https://..."
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white placeholder:text-white/40 rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                 </div>
@@ -841,13 +841,13 @@ const AdminSettings = () => {
               {/* Social Media Tab */}
               {activeTab === 'social' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <Globe className="text-primary" size={24} />
                     Sociale Medier
                   </h2>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       <Globe size={16} className="inline mr-1" />
                       Hjemmeside
                     </label>
@@ -855,12 +855,12 @@ const AdminSettings = () => {
                       type="text"
                       value={settings.website}
                       onChange={(e) => updateSetting('website', e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       <Instagram size={16} className="inline mr-1" />
                       Instagram
                     </label>
@@ -868,12 +868,12 @@ const AdminSettings = () => {
                       type="text"
                       value={settings.instagram}
                       onChange={(e) => updateSetting('instagram', e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       <Facebook size={16} className="inline mr-1" />
                       Facebook
                     </label>
@@ -881,7 +881,7 @@ const AdminSettings = () => {
                       type="text"
                       value={settings.facebook}
                       onChange={(e) => updateSetting('facebook', e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                 </div>
@@ -890,41 +890,41 @@ const AdminSettings = () => {
               {/* Notifications Tab */}
               {activeTab === 'notifications' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <Bell className="text-primary" size={24} />
                     Notifikationer
                   </h2>
                   
                   <div className="space-y-4">
-                    <label className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+                    <label className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer hover:bg-white/10 transition-colors">
                       <input
                         type="checkbox"
                         checked={settings.showGreeting}
                         onChange={(e) => updateSetting('showGreeting', e.target.checked)}
-                        className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                        className="w-5 h-5 rounded border-white/20 bg-black/30 text-primary focus:ring-primary"
                       />
                       <div>
-                        <span className="font-medium text-gray-700">Vis velkomstbesked</span>
-                        <p className="text-sm text-gray-500">Vis en hilsen baseret på tid på dagen</p>
+                        <span className="font-medium text-white">Vis velkomstbesked</span>
+                        <p className="text-sm text-white/60">Vis en hilsen baseret på tid på dagen</p>
                       </div>
                     </label>
                     
-                    <label className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+                    <label className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer hover:bg-white/10 transition-colors">
                       <input
                         type="checkbox"
                         checked={settings.showClosedWarning}
                         onChange={(e) => updateSetting('showClosedWarning', e.target.checked)}
-                        className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                        className="w-5 h-5 rounded border-white/20 bg-black/30 text-primary focus:ring-primary"
                       />
                       <div>
-                        <span className="font-medium text-gray-700">Vis lukket-advarsel</span>
-                        <p className="text-sm text-gray-500">Advar brugere når restauranten er lukket</p>
+                        <span className="font-medium text-white">Vis lukket-advarsel</span>
+                        <p className="text-sm text-white/60">Advar brugere når restauranten er lukket</p>
                       </div>
                     </label>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Tilpasset lukket-besked (valgfrit)
                     </label>
                     <textarea
@@ -932,99 +932,98 @@ const AdminSettings = () => {
                       onChange={(e) => updateSetting('customClosedMessage', e.target.value)}
                       placeholder="F.eks: Vi holder lukket i dag pga. helligdag..."
                       rows={2}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white placeholder:text-white/40 rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                 </div>
               )}
 
-              {/* Delivery Tab */}
               {activeTab === 'delivery' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <Truck className="text-primary" size={24} />
                     Levering
                   </h2>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <label className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+                    <label className="flex items-center gap-3 p-4 bg-black/30 border border-white/10 rounded-xl cursor-pointer hover:bg-black/40 transition-colors">
                       <input
                         type="checkbox"
                         checked={settings.deliveryEnabled}
                         onChange={(e) => updateSetting('deliveryEnabled', e.target.checked)}
-                        className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                        className="w-5 h-5 rounded border-white/20 bg-black/30 text-primary focus:ring-primary"
                       />
                       <div>
-                        <span className="font-medium text-gray-700">Aktiver levering</span>
-                        <p className="text-sm text-gray-500">Tillad kunder at bestille levering</p>
+                        <span className="font-medium text-white">Aktiver levering</span>
+                        <p className="text-sm text-white/60">Tillad kunder at bestille levering</p>
                       </div>
                     </label>
                     
-                    <label className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+                    <label className="flex items-center gap-3 p-4 bg-black/30 border border-white/10 rounded-xl cursor-pointer hover:bg-black/40 transition-colors">
                       <input
                         type="checkbox"
                         checked={settings.pickupEnabled}
                         onChange={(e) => updateSetting('pickupEnabled', e.target.checked)}
-                        className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                        className="w-5 h-5 rounded border-white/20 bg-black/30 text-primary focus:ring-primary"
                       />
                       <div>
-                        <span className="font-medium text-gray-700">Aktiver afhentning</span>
-                        <p className="text-sm text-gray-500">Tillad kunder at afhente selv</p>
+                        <span className="font-medium text-white">Aktiver afhentning</span>
+                        <p className="text-sm text-white/60">Tillad kunder at afhente selv</p>
                       </div>
                     </label>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Leveringsradius (km)
                       </label>
                       <input
                         type="number"
                         value={settings.deliveryRadius}
                         onChange={(e) => updateSetting('deliveryRadius', Number(e.target.value))}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Leveringsgebyr (kr)
                       </label>
                       <input
                         type="number"
                         value={settings.deliveryFee}
                         onChange={(e) => updateSetting('deliveryFee', Number(e.target.value))}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Gratis levering over (kr)
                       </label>
                       <input
                         type="number"
                         value={settings.freeDeliveryThreshold}
                         onChange={(e) => updateSetting('freeDeliveryThreshold', Number(e.target.value))}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Minimum ordrebeløb (kr)
                       </label>
                       <input
                         type="number"
                         value={settings.minOrderAmount}
                         onChange={(e) => updateSetting('minOrderAmount', Number(e.target.value))}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Estimeret leveringstid
                       </label>
                       <input
@@ -1032,12 +1031,12 @@ const AdminSettings = () => {
                         value={settings.estimatedDeliveryTime}
                         onChange={(e) => updateSetting('estimatedDeliveryTime', e.target.value)}
                         placeholder="F.eks: 30-45 min"
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white placeholder:text-white/40 rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Estimeret afhentningstid
                       </label>
                       <input
@@ -1045,7 +1044,7 @@ const AdminSettings = () => {
                         value={settings.estimatedPickupTime}
                         onChange={(e) => updateSetting('estimatedPickupTime', e.target.value)}
                         placeholder="F.eks: 15-20 min"
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                        className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white placeholder:text-white/40 rounded-xl focus:border-primary focus:outline-none"
                       />
                     </div>
                   </div>
@@ -1055,14 +1054,14 @@ const AdminSettings = () => {
               {/* Branding Tab */}
               {activeTab === 'branding' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <Palette className="text-primary" size={24} />
                     Branding & Farver
                   </h2>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Primær Farve
                       </label>
                       <div className="flex gap-3">
@@ -1070,19 +1069,19 @@ const AdminSettings = () => {
                           type="color"
                           value={settings.primaryColor}
                           onChange={(e) => updateSetting('primaryColor', e.target.value)}
-                          className="w-14 h-14 rounded-xl border-2 border-gray-200 cursor-pointer"
+                          className="w-14 h-14 rounded-xl border-2 border-white/10 cursor-pointer"
                         />
                         <input
                           type="text"
                           value={settings.primaryColor}
                           onChange={(e) => updateSetting('primaryColor', e.target.value)}
-                          className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                          className="flex-1 px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                         />
                       </div>
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Accent Farve
                       </label>
                       <div className="flex gap-3">
@@ -1090,13 +1089,13 @@ const AdminSettings = () => {
                           type="color"
                           value={settings.accentColor}
                           onChange={(e) => updateSetting('accentColor', e.target.value)}
-                          className="w-14 h-14 rounded-xl border-2 border-gray-200 cursor-pointer"
+                          className="w-14 h-14 rounded-xl border-2 border-white/10 cursor-pointer"
                         />
                         <input
                           type="text"
                           value={settings.accentColor}
                           onChange={(e) => updateSetting('accentColor', e.target.value)}
-                          className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                          className="flex-1 px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                         />
                       </div>
                     </div>
@@ -1107,38 +1106,38 @@ const AdminSettings = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Hero Overskrift
                     </label>
                     <input
                       type="text"
                       value={settings.heroTitle}
                       onChange={(e) => updateSetting('heroTitle', e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Hero Underoverskrift
                     </label>
                     <input
                       type="text"
                       value={settings.heroSubtitle}
                       onChange={(e) => updateSetting('heroSubtitle', e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Hero Knap Tekst
                     </label>
                     <input
                       type="text"
                       value={settings.heroButtonText}
                       onChange={(e) => updateSetting('heroButtonText', e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                 </div>
@@ -1147,51 +1146,51 @@ const AdminSettings = () => {
               {/* Payment Tab */}
               {activeTab === 'payment' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <CreditCard className="text-primary" size={24} />
                     Betalingsmetoder
                   </h2>
                   
                   <div className="space-y-4">
-                    <label className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+                    <label className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer hover:bg-white/10 transition-colors">
                       <input
                         type="checkbox"
                         checked={settings.acceptCard}
                         onChange={(e) => updateSetting('acceptCard', e.target.checked)}
-                        className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                        className="w-5 h-5 rounded border-white/20 bg-black/30 text-primary focus:ring-primary"
                       />
-                      <CreditCard size={24} className="text-gray-600" />
+                      <CreditCard size={24} className="text-primary" />
                       <div>
-                        <span className="font-medium text-gray-700">Kredit/Debitkort</span>
-                        <p className="text-sm text-gray-500">Visa, Mastercard, etc.</p>
+                        <span className="font-medium text-white">Kredit/Debitkort</span>
+                        <p className="text-sm text-white/60">Visa, Mastercard, etc.</p>
                       </div>
                     </label>
                     
-                    <label className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+                    <label className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer hover:bg-white/10 transition-colors">
                       <input
                         type="checkbox"
                         checked={settings.acceptMobilePay}
                         onChange={(e) => updateSetting('acceptMobilePay', e.target.checked)}
-                        className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                        className="w-5 h-5 rounded border-white/20 bg-black/30 text-primary focus:ring-primary"
                       />
-                      <Phone size={24} className="text-gray-600" />
+                      <Phone size={24} className="text-primary" />
                       <div>
-                        <span className="font-medium text-gray-700">MobilePay</span>
-                        <p className="text-sm text-gray-500">Betal med MobilePay</p>
+                        <span className="font-medium text-white">MobilePay</span>
+                        <p className="text-sm text-white/60">Betal med MobilePay</p>
                       </div>
                     </label>
                     
-                    <label className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+                    <label className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer hover:bg-white/10 transition-colors">
                       <input
                         type="checkbox"
                         checked={settings.acceptCash}
                         onChange={(e) => updateSetting('acceptCash', e.target.checked)}
-                        className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                        className="w-5 h-5 rounded border-white/20 bg-black/30 text-primary focus:ring-primary"
                       />
                       <span className="text-2xl">💵</span>
                       <div>
-                        <span className="font-medium text-gray-700">Kontant</span>
-                        <p className="text-sm text-gray-500">Betal ved levering</p>
+                        <span className="font-medium text-white">Kontant</span>
+                        <p className="text-sm text-white/60">Betal ved levering</p>
                       </div>
                     </label>
                   </div>
@@ -1201,93 +1200,93 @@ const AdminSettings = () => {
               {/* Discounts Tab */}
               {activeTab === 'discounts' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <Percent className="text-primary" size={24} />
                     Rabatter & Kampagner
                   </h2>
                   
                   <div className="space-y-4">
-                    <label className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+                    <label className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer hover:bg-white/10 transition-colors">
                       <input
                         type="checkbox"
                         checked={settings.showPromoPopup}
                         onChange={(e) => updateSetting('showPromoPopup', e.target.checked)}
-                        className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                        className="w-5 h-5 rounded border-white/20 bg-black/30 text-primary focus:ring-primary"
                       />
-                      <Gift size={24} className="text-gray-600" />
+                      <Gift size={24} className="text-primary" />
                       <div>
-                        <span className="font-medium text-gray-700">Vis Kampagne Popup</span>
-                        <p className="text-sm text-gray-500">Vis en popup med tilbud til nye besøgende</p>
+                        <span className="font-medium text-white">Vis Kampagne Popup</span>
+                        <p className="text-sm text-white/60">Vis en popup med tilbud til nye besøgende</p>
                       </div>
                     </label>
                   </div>
                   
                   {settings.showPromoPopup && (
-                    <div className="space-y-4 p-4 bg-purple-50 rounded-xl">
+                    <div className="space-y-4 p-4 bg-primary/10 border border-primary/30 rounded-xl">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-white/80 mb-2">
                           Kampagne Titel
                         </label>
                         <input
                           type="text"
                           value={settings.promoTitle}
                           onChange={(e) => updateSetting('promoTitle', e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                          className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-white/80 mb-2">
                           Kampagne Beskrivelse
                         </label>
                         <input
                           type="text"
                           value={settings.promoDescription}
                           onChange={(e) => updateSetting('promoDescription', e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                          className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-white/80 mb-2">
                           Rabatkode
                         </label>
                         <input
                           type="text"
                           value={settings.promoCode}
                           onChange={(e) => updateSetting('promoCode', e.target.value.toUpperCase())}
-                          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none font-mono"
+                          className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none font-mono"
                         />
                       </div>
                     </div>
                   )}
                   
-                  <div className="p-4 bg-blue-50 rounded-xl">
-                    <h4 className="font-medium text-blue-900 mb-2">Aktive Rabatkoder</h4>
+                  <div className="p-4 bg-white/5 border border-white/10 rounded-xl">
+                    <h4 className="font-medium text-white mb-2">Aktive Rabatkoder</h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <code className="bg-blue-100 px-2 py-1 rounded">SPIN5</code>
-                        <span>5% rabat</span>
+                        <code className="bg-black/30 border border-white/10 text-white px-2 py-1 rounded">SPIN5</code>
+                        <span className="text-white/70">5% rabat</span>
                       </div>
                       <div className="flex justify-between">
-                        <code className="bg-blue-100 px-2 py-1 rounded">SPIN10</code>
-                        <span>10% rabat</span>
+                        <code className="bg-black/30 border border-white/10 text-white px-2 py-1 rounded">SPIN10</code>
+                        <span className="text-white/70">10% rabat</span>
                       </div>
                       <div className="flex justify-between">
-                        <code className="bg-blue-100 px-2 py-1 rounded">SPIN15</code>
-                        <span>15% rabat</span>
+                        <code className="bg-black/30 border border-white/10 text-white px-2 py-1 rounded">SPIN15</code>
+                        <span className="text-white/70">15% rabat</span>
                       </div>
                       <div className="flex justify-between">
-                        <code className="bg-blue-100 px-2 py-1 rounded">SPIN20</code>
-                        <span>20% rabat</span>
+                        <code className="bg-black/30 border border-white/10 text-white px-2 py-1 rounded">SPIN20</code>
+                        <span className="text-white/70">20% rabat</span>
                       </div>
                       <div className="flex justify-between">
-                        <code className="bg-blue-100 px-2 py-1 rounded">FREESHIP</code>
-                        <span>Gratis levering</span>
+                        <code className="bg-black/30 border border-white/10 text-white px-2 py-1 rounded">FREESHIP</code>
+                        <span className="text-white/70">Gratis levering</span>
                       </div>
                       <div className="flex justify-between">
-                        <code className="bg-blue-100 px-2 py-1 rounded">FREEDRINK</code>
-                        <span>Gratis drik</span>
+                        <code className="bg-black/30 border border-white/10 text-white px-2 py-1 rounded">FREEDRINK</code>
+                        <span className="text-white/70">Gratis drik</span>
                       </div>
                     </div>
                   </div>
@@ -1297,39 +1296,39 @@ const AdminSettings = () => {
               {/* SEO Tab */}
               {activeTab === 'seo' && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-bold text-secondary flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <Search className="text-primary" size={24} />
                     SEO & Meta Tags
                   </h2>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Meta Titel
                     </label>
                     <input
                       type="text"
                       value={settings.metaTitle}
                       onChange={(e) => updateSetting('metaTitle', e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
-                    <p className="text-xs text-gray-500 mt-1">Anbefalet: 50-60 tegn</p>
+                    <p className="text-xs text-white/60 mt-1">Anbefalet: 50-60 tegn</p>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Meta Beskrivelse
                     </label>
                     <textarea
                       value={settings.metaDescription}
                       onChange={(e) => updateSetting('metaDescription', e.target.value)}
                       rows={3}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white rounded-xl focus:border-primary focus:outline-none"
                     />
-                    <p className="text-xs text-gray-500 mt-1">Anbefalet: 150-160 tegn</p>
+                    <p className="text-xs text-white/60 mt-1">Anbefalet: 150-160 tegn</p>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Nøgleord (kommasepareret)
                     </label>
                     <input
@@ -1337,16 +1336,16 @@ const AdminSettings = () => {
                       value={settings.metaKeywords}
                       onChange={(e) => updateSetting('metaKeywords', e.target.value)}
                       placeholder="pizza, aalborg, levering, italiensk"
-                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-primary focus:outline-none"
+                      className="w-full px-4 py-3 border border-white/10 bg-black/30 text-white placeholder:text-white/40 rounded-xl focus:border-primary focus:outline-none"
                     />
                   </div>
                   
-                  <div className="p-4 bg-green-50 rounded-xl">
-                    <h4 className="font-medium text-green-900 mb-2">Forhåndsvisning i Google</h4>
-                    <div className="bg-white p-4 rounded-lg border">
-                      <p className="text-blue-600 text-lg hover:underline cursor-pointer">{settings.metaTitle || 'Sidetitel'}</p>
-                      <p className="text-green-700 text-sm">{settings.website || 'www.example.com'}</p>
-                      <p className="text-gray-600 text-sm">{settings.metaDescription || 'Meta beskrivelse vises her...'}</p>
+                  <div className="p-4 bg-white/5 border border-white/10 rounded-xl">
+                    <h4 className="font-medium text-white mb-2">Forhåndsvisning i Google</h4>
+                    <div className="bg-black/30 p-4 rounded-lg border border-white/10">
+                      <p className="text-primary text-lg hover:underline cursor-pointer">{settings.metaTitle || 'Sidetitel'}</p>
+                      <p className="text-white/70 text-sm">{settings.website || 'www.example.com'}</p>
+                      <p className="text-white/70 text-sm">{settings.metaDescription || 'Meta beskrivelse vises her...'}</p>
                     </div>
                   </div>
                 </div>

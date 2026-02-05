@@ -75,7 +75,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-[#D4382C] to-[#F5A623] overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-dark via-secondary to-dark overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <motion.div
@@ -108,11 +108,11 @@ const Testimonials = () => {
               animate="center"
               exit="exit"
               transition={{ duration: 0.5, ease: 'easeInOut' }}
-              className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl"
+              className="bg-surface rounded-3xl p-8 md:p-12 shadow-2xl border border-primary/10"
             >
               {/* Quote Icon */}
               <div className="absolute -top-6 left-8">
-                <div className="w-12 h-12 bg-[#F5A623] rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
                   <Quote className="text-white" size={24} />
                 </div>
               </div>
@@ -128,7 +128,7 @@ const Testimonials = () => {
                   <img
                     src={testimonials[currentIndex].image}
                     alt={testimonials[currentIndex].name}
-                    className="w-24 h-24 rounded-full object-cover border-4 border-[#F5A623]"
+                    className="w-24 h-24 rounded-full object-cover border-4 border-primary"
                   />
                 </motion.div>
 
@@ -146,16 +146,16 @@ const Testimonials = () => {
                   </div>
 
                   {/* Text */}
-                  <p className="text-gray-600 text-lg mb-6 italic">
+                  <p className="text-muted text-lg mb-6 italic">
                     "{testimonials[currentIndex].text}"
                   </p>
 
                   {/* Author */}
                   <div>
-                    <h4 className="font-bold text-[#1A1A2E] text-xl">
+                    <h4 className="font-bold text-white text-xl">
                       {testimonials[currentIndex].name}
                     </h4>
-                    <p className="text-[#D4382C]">
+                    <p className="text-primary">
                       {testimonials[currentIndex].role}
                     </p>
                   </div>

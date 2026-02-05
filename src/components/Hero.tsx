@@ -1,7 +1,44 @@
 import { motion } from 'framer-motion';
 import { ChevronDown, Star, Flame, Clock, Truck, Award } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+interface HeroSettings {
+  heroTitle: string;
+  heroSubtitle: string;
+  heroButtonText: string;
+  heroImage?: string;
+  openTime?: string;
+  closeTime?: string;
+  freeDeliveryThreshold?: number;
+}
 
 const Hero = () => {
+  const [settings, setSettings] = useState<HeroSettings>({
+    heroTitle: 'Ægte Italiensk',
+    heroSubtitle: 'Pizza Oplevelse',
+    heroButtonText: 'Se Vores Menu',
+  });
+
+  useEffect(() => {
+    const savedSettings = localStorage.getItem('restaurantSettings');
+    if (savedSettings) {
+      try {
+        const parsed = JSON.parse(savedSettings);
+        setSettings(prev => ({
+          heroTitle: parsed.heroTitle || prev.heroTitle,
+          heroSubtitle: parsed.heroSubtitle || prev.heroSubtitle,
+          heroButtonText: parsed.heroButtonText || prev.heroButtonText,
+          heroImage: parsed.heroImage || prev.heroImage,
+          openTime: parsed.openTime || prev.openTime,
+          closeTime: parsed.closeTime || prev.closeTime,
+          freeDeliveryThreshold: parsed.freeDeliveryThreshold || prev.freeDeliveryThreshold,
+        }));
+      } catch {
+        // ignore
+      }
+    }
+  }, []);
+
   return (
     <section
       id="home"
@@ -13,14 +50,17 @@ const Hero = () => {
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 10, ease: 'easeOut' }}
-          src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1920&q=80"
+          src={
+            settings.heroImage ||
+            'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1920&q=80'
+          }
           alt="Pizza Background"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80" />
         {/* Animated gradient overlay */}
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20"
+          className="absolute inset-0 bg-gradient-to-r from-primary/25 to-accent/25"
           animate={{ opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 4, repeat: Infinity }}
         />
@@ -120,13 +160,13 @@ const Hero = () => {
             transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
             className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6"
           >
-            <Flame className="text-[#F5A623]" size={18} />
+            <Flame className="text-primary" size={18} />
             <span className="text-white text-sm font-medium">
               #1 Pizza i Aalborg
             </span>
             <div className="flex">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={14} className="text-[#F5A623] fill-[#F5A623]" />
+                <Star key={i} size={14} className="text-primary fill-primary" />
               ))}
             </div>
           </motion.div>
@@ -138,10 +178,10 @@ const Hero = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6"
           >
-            Ægte Italiensk
+            {settings.heroTitle}
             <br />
-            <span className="bg-gradient-to-r from-[#D4382C] via-[#F5A623] to-[#D4382C] bg-clip-text text-transparent bg-[size:200%_auto] animate-[gradient_3s_linear_infinite]">
-              Pizza Oplevelse
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[size:200%_auto] animate-[gradient_3s_linear_infinite]">
+              {settings.heroSubtitle}
             </span>
           </motion.h1>
 
@@ -150,7 +190,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-white/70 mb-10 max-w-2xl mx-auto"
           >
             Håndlavede pizzaer med de fineste ingredienser, bagt i stenovn
             efter traditionelle italienske opskrifter
@@ -165,11 +205,11 @@ const Hero = () => {
           >
             <motion.a
               href="#menu"
-              whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(212, 56, 44, 0.4)' }}
+              whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(212, 175, 55, 0.25)' }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-[#D4382C] to-[#F5A623] text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg flex items-center gap-2"
+              className="bg-gradient-to-r from-primary to-accent text-dark px-8 py-4 rounded-full font-bold text-lg shadow-lg flex items-center gap-2"
             >
-              Se Vores Menu
+              {settings.heroButtonText}
               <motion.span
                 animate={{ x: [0, 5, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
@@ -181,7 +221,7 @@ const Hero = () => {
               href="#order"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-[#1A1A2E] transition-colors"
+              className="border-2 border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 hover:text-white transition-colors"
             >
               Bestil Online
             </motion.a>
@@ -208,16 +248,16 @@ const Hero = () => {
                 className="text-center group cursor-pointer"
               >
                 <motion.div 
-                  className="w-12 h-12 mx-auto mb-3 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-accent/30 transition-colors"
+                  className="w-12 h-12 mx-auto mb-3 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-primary/30 transition-colors"
                   whileHover={{ rotate: [0, -10, 10, 0] }}
                   transition={{ duration: 0.5 }}
                 >
-                  <stat.icon className="text-[#F5A623]" size={24} />
+                  <stat.icon className="text-primary" size={24} />
                 </motion.div>
-                <div className="text-3xl md:text-4xl font-bold text-[#F5A623]">
+                <div className="text-3xl md:text-4xl font-bold text-primary">
                   {stat.number}
                 </div>
-                <div className="text-gray-300 text-sm mt-1">{stat.label}</div>
+                <div className="text-white/70 text-sm mt-1">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -230,12 +270,17 @@ const Hero = () => {
             className="mt-12 flex flex-wrap justify-center gap-4"
           >
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white/80 text-sm">
-              <Clock size={16} className="text-accent" />
-              <span>Åben: 11:00 - 22:00</span>
+              <Clock size={16} className="text-primary" />
+              <span>
+                Åben: {settings.openTime || '11:00'} - {settings.closeTime || '22:00'}
+              </span>
             </div>
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white/80 text-sm">
-              <Truck size={16} className="text-accent" />
-              <span>Gratis levering over 150 kr</span>
+              <Truck size={16} className="text-primary" />
+              <span>
+                Gratis levering over{' '}
+                {settings.freeDeliveryThreshold ? `${settings.freeDeliveryThreshold} kr` : '150 kr'}
+              </span>
             </div>
           </motion.div>
         </motion.div>

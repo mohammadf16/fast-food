@@ -56,7 +56,7 @@ const GalleryPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-cream pt-24 pb-12">
+    <div className="min-h-screen bg-dark pt-24 pb-12">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -68,10 +68,10 @@ const GalleryPage = () => {
             <Camera size={18} />
             <span className="font-semibold">Vores Galleri</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
-            Øjeblikke af <span className="text-primary">Lækkerhed</span>
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+            Øjeblikke af Lækkerhed
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-white/70 max-w-2xl mx-auto">
             Tag et kig bag kulisserne og se vores lækre kreationer, hyggelige restaurant og glade gæster
           </p>
         </motion.div>
@@ -86,8 +86,8 @@ const GalleryPage = () => {
               onClick={() => setSelectedCategory(category)}
               className={`px-5 py-2.5 rounded-full font-medium transition-all ${
                 selectedCategory === category
-                  ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg'
-                  : 'bg-white text-gray-600 hover:bg-gray-50 shadow'
+                  ? 'bg-gradient-to-r from-primary to-accent text-dark shadow-lg'
+                  : 'bg-surface text-muted hover:bg-surface-2 shadow'
               }`}
             >
               {category}
@@ -161,21 +161,21 @@ const GalleryPage = () => {
           viewport={{ once: true }}
           className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
         >
-          <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
+          <div className="bg-surface p-6 rounded-2xl shadow-lg text-center">
             <div className="text-3xl font-bold text-primary">{galleryImages.length}+</div>
-            <div className="text-gray-600 text-sm mt-1">Billeder</div>
+            <div className="text-muted text-sm mt-1">Billeder</div>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
+          <div className="bg-surface p-6 rounded-2xl shadow-lg text-center">
             <div className="text-3xl font-bold text-primary">50+</div>
-            <div className="text-gray-600 text-sm mt-1">Pizza Varianter</div>
+            <div className="text-muted text-sm mt-1">Pizza Varianter</div>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
+          <div className="bg-surface p-6 rounded-2xl shadow-lg text-center">
             <div className="text-3xl font-bold text-primary">15+</div>
-            <div className="text-gray-600 text-sm mt-1">År i Drift</div>
+            <div className="text-muted text-sm mt-1">År i Drift</div>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
+          <div className="bg-surface p-6 rounded-2xl shadow-lg text-center">
             <div className="text-3xl font-bold text-primary">10K+</div>
-            <div className="text-gray-600 text-sm mt-1">Glade Kunder</div>
+            <div className="text-muted text-sm mt-1">Glade Kunder</div>
           </div>
         </motion.div>
       </div>

@@ -8,7 +8,8 @@ interface ChefLoaderProps {
 
 const ChefLoader = ({ message = 'Forbereder...', showProgress = false, progress = 0 }: ChefLoaderProps) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[400px] py-12">
+    <div className="flex flex-col items-center justify-center min-h-[400px] py-12 px-4">
+      <div className="w-full max-w-xl rounded-3xl bg-white/80 backdrop-blur border border-black/5 shadow-lg p-6 md:p-10">
       {/* Kitchen Scene */}
       <div className="relative w-80 h-64 mb-8">
         {/* Background - Kitchen Counter */}
@@ -212,7 +213,7 @@ const ChefLoader = ({ message = 'Forbereder...', showProgress = false, progress 
               transition={{ duration: 0.5 }}
             />
           </div>
-          <p className="text-center text-sm text-gray-500 mt-2">{progress}% færdig</p>
+          <p className="text-center text-sm text-gray-600 mt-2">{progress}% færdig</p>
         </div>
       )}
 
@@ -222,7 +223,7 @@ const ChefLoader = ({ message = 'Forbereder...', showProgress = false, progress 
         animate={{ opacity: [1, 0.5, 1] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >
-        <p className="text-xl font-semibold text-secondary">{message}</p>
+        <p className="text-xl font-semibold text-gray-900">{message}</p>
         <div className="flex justify-center gap-1 mt-2">
           {[0, 1, 2].map((i) => (
             <motion.div
@@ -234,6 +235,7 @@ const ChefLoader = ({ message = 'Forbereder...', showProgress = false, progress 
           ))}
         </div>
       </motion.div>
+      </div>
     </div>
   );
 };

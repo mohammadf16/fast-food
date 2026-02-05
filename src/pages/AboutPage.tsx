@@ -55,7 +55,7 @@ const values = [
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen bg-cream pt-24 pb-12">
+    <div className="min-h-screen bg-dark pt-24 pb-12">
       {/* Hero Section */}
       <section className="relative h-[50vh] mb-20 overflow-hidden">
         <div className="absolute inset-0">
@@ -89,10 +89,10 @@ const AboutPage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-secondary mb-6">
-                En Drøm Født i <span className="text-primary">Italien</span>
+              <h2 className="text-4xl font-bold text-primary mb-6">
+                En Drøm Født i Italien
               </h2>
-              <div className="space-y-4 text-gray-600">
+              <div className="space-y-4 text-white/70">
                 <p>
                   Det hele startede i 2008, da Marco Rossi besluttede at bringe sin families 
                   hundrede år gamle pizzaopskrifter fra Sorrento-kysten til Danmark. Med kun 
@@ -137,7 +137,7 @@ const AboutPage = () => {
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-primary">15+</div>
-                    <div className="text-gray-600">Års Erfaring</div>
+                    <div className="text-muted">Års Erfaring</div>
                   </div>
                 </div>
               </motion.div>
@@ -164,13 +164,13 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="bg-white p-6 rounded-2xl shadow-lg text-center"
+                className="bg-surface p-6 rounded-2xl shadow-lg text-center"
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="text-white" size={28} />
+                  <value.icon className="text-dark" size={28} />
                 </div>
                 <h3 className="text-xl font-bold text-secondary mb-2">{value.title}</h3>
-                <p className="text-gray-600 text-sm">{value.description}</p>
+                <p className="text-muted text-sm">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -199,10 +199,10 @@ const AboutPage = () => {
                 }`}
               >
                 <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                  <div className="bg-white p-6 rounded-2xl shadow-lg">
+                  <div className="bg-surface p-6 rounded-2xl shadow-lg">
                     <span className="text-primary font-bold text-2xl">{milestone.year}</span>
                     <h3 className="text-xl font-bold text-secondary mt-2">{milestone.title}</h3>
-                    <p className="text-gray-600 text-sm mt-1">{milestone.description}</p>
+                    <p className="text-muted text-sm mt-1">{milestone.description}</p>
                   </div>
                 </div>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white border-4 border-primary rounded-full" />
@@ -221,7 +221,7 @@ const AboutPage = () => {
           >
             Mød Holdet
           </motion.h2>
-          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-muted text-center mb-12 max-w-2xl mx-auto">
             De passionerede mennesker bag hver eneste pizza
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -233,7 +233,7 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
-                className="bg-white rounded-3xl overflow-hidden shadow-lg group"
+                className="bg-surface rounded-3xl overflow-hidden shadow-lg group"
               >
                 <div className="h-64 overflow-hidden">
                   <img
@@ -245,7 +245,7 @@ const AboutPage = () => {
                 <div className="p-6 text-center">
                   <h3 className="text-xl font-bold text-secondary">{member.name}</h3>
                   <p className="text-primary font-medium mb-3">{member.role}</p>
-                  <p className="text-gray-600 text-sm">{member.description}</p>
+                  <p className="text-muted text-sm">{member.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -254,7 +254,7 @@ const AboutPage = () => {
 
         {/* Awards */}
         <section className="mb-20">
-          <div className="bg-gradient-to-r from-primary to-accent rounded-3xl p-8 md:p-12 text-white text-center">
+          <div className="bg-gradient-to-r from-primary to-accent rounded-3xl p-8 md:p-12 text-dark text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -262,7 +262,7 @@ const AboutPage = () => {
             >
               <Award size={48} className="mx-auto mb-4" />
               <h2 className="text-3xl font-bold mb-4">Prisvindende Kvalitet</h2>
-              <p className="text-white/90 max-w-2xl mx-auto mb-8">
+              <p className="text-dark/90 max-w-2xl mx-auto mb-8">
                 Vi er stolte modtagere af adskillige priser for vores engagement i kvalitet og autenticitet
               </p>
               <div className="flex flex-wrap justify-center gap-8">
@@ -294,14 +294,14 @@ const AboutPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
-              className="bg-white p-6 rounded-2xl shadow-lg flex items-center gap-4"
+              className="bg-surface p-6 rounded-2xl shadow-lg flex items-center gap-4"
             >
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center">
                 <MapPin className="text-primary" size={24} />
               </div>
               <div>
                 <h3 className="font-bold text-secondary">Adresse</h3>
-                <p className="text-gray-600 text-sm">Boulevarden 123, 9000 Aalborg</p>
+                <p className="text-muted text-sm">Boulevarden 123, 9000 Aalborg</p>
               </div>
             </motion.a>
 
@@ -312,14 +312,14 @@ const AboutPage = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-white p-6 rounded-2xl shadow-lg flex items-center gap-4"
+              className="bg-surface p-6 rounded-2xl shadow-lg flex items-center gap-4"
             >
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center">
                 <Phone className="text-primary" size={24} />
               </div>
               <div>
                 <h3 className="font-bold text-secondary">Telefon</h3>
-                <p className="text-gray-600 text-sm">+45 12 34 56 78</p>
+                <p className="text-muted text-sm">+45 12 34 56 78</p>
               </div>
             </motion.a>
 
@@ -330,14 +330,14 @@ const AboutPage = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-white p-6 rounded-2xl shadow-lg flex items-center gap-4"
+              className="bg-surface p-6 rounded-2xl shadow-lg flex items-center gap-4"
             >
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center">
                 <Mail className="text-primary" size={24} />
               </div>
               <div>
                 <h3 className="font-bold text-secondary">Email</h3>
-                <p className="text-gray-600 text-sm">info@sorrentopizza.dk</p>
+                <p className="text-muted text-sm">info@sorrentopizza.dk</p>
               </div>
             </motion.a>
           </div>

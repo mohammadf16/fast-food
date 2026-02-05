@@ -31,25 +31,25 @@ const ContactPage = () => {
       icon: MapPin,
       title: 'Adresse',
       details: ['Boulevarden 123', '9000 Aalborg', 'Danmark'],
-      color: 'bg-blue-500',
+      color: 'bg-gradient-to-br from-primary to-accent',
     },
     {
       icon: Phone,
       title: 'Telefon',
       details: ['+45 12 34 56 78', 'Mandag - Søndag', '11:00 - 22:00'],
-      color: 'bg-green-500',
+      color: 'bg-gradient-to-br from-primary to-accent',
     },
     {
       icon: Mail,
       title: 'Email',
       details: ['info@sorrentopizza.dk', 'booking@sorrentopizza.dk', 'Svar inden 24 timer'],
-      color: 'bg-purple-500',
+      color: 'bg-gradient-to-br from-primary to-accent',
     },
     {
       icon: Clock,
       title: 'Åbningstider',
       details: ['Man-Tor: 11:00-22:00', 'Fre-Lør: 11:00-23:00', 'Søndag: 12:00-21:00'],
-      color: 'bg-accent',
+      color: 'bg-gradient-to-br from-primary to-accent',
     },
   ];
 
@@ -73,7 +73,7 @@ const ContactPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-cream pt-24 pb-12">
+    <div className="min-h-screen bg-dark pt-24 pb-12">
       <Toast 
         message="Tak for din besked! Vi vender tilbage hurtigst muligt."
         isVisible={showToast}
@@ -115,14 +115,14 @@ const ContactPage = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-white p-6 rounded-2xl shadow-lg"
+              className="bg-surface rounded-2xl p-6 shadow-lg border border-primary/10 hover:border-primary/30 transition-colors"
             >
               <div className={`w-14 h-14 ${info.color} rounded-xl flex items-center justify-center mb-4`}>
                 <info.icon className="text-white" size={24} />
               </div>
-              <h3 className="text-xl font-bold text-secondary mb-3">{info.title}</h3>
+              <h3 className="text-xl font-bold text-white mb-3">{info.title}</h3>
               {info.details.map((detail, i) => (
-                <p key={i} className="text-gray-600 text-sm">{detail}</p>
+                <p key={i} className="text-muted text-sm">{detail}</p>
               ))}
             </motion.div>
           ))}
@@ -135,38 +135,38 @@ const ContactPage = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white rounded-3xl p-8 shadow-xl">
+            <div className="bg-surface rounded-3xl p-8 shadow-xl border border-primary/10">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                   <MessageSquare className="text-primary" size={24} />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-secondary">Send en Besked</h2>
-                  <p className="text-gray-500 text-sm">Vi svarer inden for 24 timer</p>
+                  <h2 className="text-2xl font-bold text-white">Send en Besked</h2>
+                  <p className="text-muted text-sm">Vi svarer inden for 24 timer</p>
                 </div>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Navn *</label>
+                    <label className="block text-sm font-medium text-muted mb-2">Navn *</label>
                     <input
                       type="text"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border border-surface-2 bg-dark focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition-all text-white placeholder:text-muted"
                       placeholder="Dit navn"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                    <label className="block text-sm font-medium text-muted mb-2">Email *</label>
                     <input
                       type="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border border-surface-2 bg-dark focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition-all text-white placeholder:text-muted"
                       placeholder="din@email.dk"
                     />
                   </div>
@@ -174,41 +174,41 @@ const ContactPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Telefon</label>
+                    <label className="block text-sm font-medium text-muted mb-2">Telefon</label>
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border border-surface-2 bg-dark focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition-all text-white placeholder:text-muted"
                       placeholder="+45 12 34 56 78"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Emne *</label>
+                    <label className="block text-sm font-medium text-muted mb-2">Emne *</label>
                     <select
                       required
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border border-surface-2 bg-dark focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition-all text-white"
                     >
-                      <option value="">Vælg emne</option>
-                      <option value="order">Spørgsmål til ordre</option>
-                      <option value="booking">Bordreservation</option>
-                      <option value="catering">Catering forespørgsel</option>
-                      <option value="feedback">Feedback</option>
-                      <option value="other">Andet</option>
+                      <option value="" className="bg-dark text-white">Vælg emne</option>
+                      <option value="order" className="bg-dark text-white">Spørgsmål til ordre</option>
+                      <option value="booking" className="bg-dark text-white">Bordreservation</option>
+                      <option value="catering" className="bg-dark text-white">Catering forespørgsel</option>
+                      <option value="feedback" className="bg-dark text-white">Feedback</option>
+                      <option value="other" className="bg-dark text-white">Andet</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Besked *</label>
+                  <label className="block text-sm font-medium text-muted mb-2">Besked *</label>
                   <textarea
                     required
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none transition-colors resize-none"
+                    className="w-full px-4 py-3 rounded-xl border border-surface-2 bg-dark focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition-all text-white placeholder:text-muted resize-none"
                     placeholder="Skriv din besked her..."
                   />
                 </div>
@@ -218,11 +218,11 @@ const ContactPage = () => {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-xl font-bold text-lg shadow-lg flex items-center justify-center gap-2 disabled:opacity-70"
+                                    className="w-full bg-gradient-to-r from-primary to-accent text-dark py-4 rounded-xl font-bold text-lg shadow-lg flex items-center justify-center gap-2 disabled:opacity-70 hover:shadow-xl transition-shadow"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
                       Sender...
                     </>
                   ) : (
@@ -243,7 +243,7 @@ const ContactPage = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white rounded-3xl overflow-hidden shadow-xl h-[300px]"
+              className="bg-surface rounded-3xl overflow-hidden shadow-xl h-[300px] border border-primary/10"
             >
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2170.3893943567893!2d9.9179851!3d57.0488195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464932b6a2b7696b%3A0x861634f2bf524040!2sAalborg%2C%20Denmark!5e0!3m2!1sen!2s!4v1635000000000!5m2!1sen!2s"
@@ -262,17 +262,17 @@ const ContactPage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-white rounded-3xl p-6 shadow-xl"
+              className="bg-surface rounded-3xl p-6 shadow-xl border border-primary/10"
             >
-              <h3 className="text-xl font-bold text-secondary mb-6 flex items-center gap-2">
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                 <CheckCircle className="text-primary" size={24} />
                 Ofte Stillede Spørgsmål
               </h3>
               <div className="space-y-4">
                 {faqs.map((faq, index) => (
-                  <div key={index} className="border-b border-gray-100 pb-4 last:border-0">
-                    <h4 className="font-semibold text-secondary mb-1">{faq.question}</h4>
-                    <p className="text-gray-600 text-sm">{faq.answer}</p>
+                  <div key={index} className="border-b border-primary/10 pb-4 last:border-0">
+                    <h4 className="font-semibold text-white mb-1">{faq.question}</h4>
+                    <p className="text-muted text-sm">{faq.answer}</p>
                   </div>
                 ))}
               </div>
@@ -285,10 +285,10 @@ const ContactPage = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-primary to-accent rounded-3xl p-8 md:p-12 text-center text-white"
+          className="bg-gradient-to-r from-primary to-accent rounded-3xl p-8 md:p-12 text-center text-black"
         >
           <h2 className="text-3xl font-bold mb-4">Klar til at Bestille?</h2>
-          <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+          <p className="text-black/90 mb-6 max-w-2xl mx-auto">
             Springe køen over og bestil online. Din lækre pizza venter på dig!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -296,7 +296,7 @@ const ContactPage = () => {
               href="/menu"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-primary px-8 py-4 rounded-full font-bold shadow-lg"
+              className="bg-dark text-primary px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-xl transition-shadow"
             >
               Se Menu
             </motion.a>
@@ -304,7 +304,7 @@ const ContactPage = () => {
               href="tel:+4512345678"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold border-2 border-white/30"
+              className="bg-black/30 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold border-2 border-black/30 hover:bg-black/50 transition-colors"
             >
               Ring Nu: +45 12 34 56 78
             </motion.a>

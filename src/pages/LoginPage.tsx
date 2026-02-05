@@ -29,26 +29,26 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream via-white to-cream pt-32 pb-20">
+    <div className="min-h-screen bg-dark pt-32 pb-20">
       <div className="max-w-md mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-3xl shadow-2xl p-8"
+          className="bg-surface rounded-3xl shadow-2xl p-8 border border-primary/10"
         >
           {/* Logo */}
           <div className="text-center mb-8">
             <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-white font-bold text-3xl">S</span>
             </div>
-            <h1 className="text-3xl font-bold text-secondary mb-2">Velkommen Tilbage!</h1>
-            <p className="text-gray-600">Log ind på din konto</p>
+            <h1 className="text-3xl font-bold text-white mb-2">Velkommen Tilbage!</h1>
+            <p className="text-white/70">Log ind på din konto</p>
           </div>
 
           {/* Demo Info */}
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
-            <p className="text-sm text-blue-800 font-medium mb-2">🔐 Demo Login:</p>
-            <p className="text-xs text-blue-600">
+          <div className="bg-primary/10 border border-primary/30 rounded-xl p-4 mb-6">
+            <p className="text-sm text-white font-medium mb-2">🔐 Demo Login:</p>
+            <p className="text-xs text-white/70">
               <strong>Admin:</strong> admin@sorrentopizza.dk / password<br />
               <strong>Kunde:</strong> john@example.com / password
             </p>
@@ -59,44 +59,44 @@ const LoginPage = () => {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-center gap-3"
+              className="bg-primary/10 border border-primary/30 rounded-xl p-4 mb-6 flex items-center gap-3"
             >
-              <AlertCircle className="text-red-500" size={20} />
-              <p className="text-sm text-red-600">{error}</p>
+              <AlertCircle className="text-primary" size={20} />
+              <p className="text-sm text-white">{error}</p>
             </motion.div>
           )}
 
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-white/80 mb-2">
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-white/10 bg-black/30 text-white placeholder:text-white/40 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                   placeholder="din@email.dk"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-white/80 mb-2">
                 Adgangskode
               </label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-white/10 bg-black/30 text-white placeholder:text-white/40 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                   placeholder="••••••••"
                 />
               </div>
@@ -105,7 +105,7 @@ const LoginPage = () => {
             <div className="flex items-center justify-between">
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 text-primary rounded" />
-                <span className="text-sm text-gray-600">Husk mig</span>
+                <span className="text-sm text-white/70">Husk mig</span>
               </label>
               <a href="#" className="text-sm text-primary hover:underline">
                 Glemt adgangskode?
@@ -132,7 +132,7 @@ const LoginPage = () => {
 
           {/* Register Link */}
           <div className="mt-8 text-center">
-            <p className="text-gray-600">
+            <p className="text-white/70">
               Har du ikke en konto?{' '}
               <Link to="/register" className="text-primary font-semibold hover:underline">
                 Opret konto
@@ -142,7 +142,7 @@ const LoginPage = () => {
 
           {/* Back to Home */}
           <div className="mt-6 text-center">
-            <Link to="/" className="text-sm text-gray-500 hover:text-primary transition-colors">
+            <Link to="/" className="text-sm text-white/60 hover:text-primary transition-colors">
               ← Tilbage til forsiden
             </Link>
           </div>

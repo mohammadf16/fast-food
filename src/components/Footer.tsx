@@ -1,7 +1,42 @@
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const Footer = () => {
+  const [settings, setSettings] = useState({
+    restaurantName: 'Sorrento',
+    slogan: 'PIZZA AALBORG',
+    phone: '+45 98 12 34 56',
+    email: 'info@sorrentopizza.dk',
+    address: 'Hadsundvej 11',
+    city: 'Aalborg',
+    zipCode: '9000',
+    openTime: '11:00',
+    closeTime: '22:00',
+  });
+
+  useEffect(() => {
+    const savedSettings = localStorage.getItem('restaurantSettings');
+    if (savedSettings) {
+      try {
+        const parsed = JSON.parse(savedSettings);
+        setSettings(prev => ({
+          restaurantName: parsed.restaurantName || prev.restaurantName,
+          slogan: parsed.slogan || prev.slogan,
+          phone: parsed.phone || prev.phone,
+          email: parsed.email || prev.email,
+          address: parsed.address || prev.address,
+          city: parsed.city || prev.city,
+          zipCode: parsed.zipCode || prev.zipCode,
+          openTime: parsed.openTime || prev.openTime,
+          closeTime: parsed.closeTime || prev.closeTime,
+        }));
+      } catch {
+        // ignore
+      }
+    }
+  }, []);
+
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
@@ -21,9 +56,9 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#0F0F1A] text-white">
+    <footer className="bg-dark text-white">
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
           <motion.div
@@ -32,15 +67,15 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#D4382C] to-[#F5A623] rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-xl">S</span>
               </div>
               <div>
-                <h3 className="text-2xl font-bold">Sorrento</h3>
-                <p className="text-[#F5A623] text-xs">PIZZA AALBORG</p>
+                <h3 className="text-2xl font-bold">{settings.restaurantName}</h3>
+                <p className="text-primary text-xs">{settings.slogan}</p>
               </div>
             </div>
-            <p className="text-gray-400 mb-6 leading-relaxed">
+            <p className="text-white/70 mb-6 leading-relaxed">
               Autentisk italiensk pizza lavet med kærlighed og de fineste
               ingredienser siden 2009.
             </p>
@@ -56,7 +91,7 @@ const Footer = () => {
                   href={social.href}
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.9 }}
-                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#D4382C] transition-colors"
+                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
                 >
                   <social.icon size={18} />
                 </motion.a>
@@ -73,16 +108,16 @@ const Footer = () => {
           >
             <h4 className="text-lg font-bold mb-6 relative">
               Hurtige Links
-              <span className="absolute -bottom-2 left-0 w-10 h-1 bg-gradient-to-r from-[#D4382C] to-[#F5A623] rounded-full" />
+              <span className="absolute -bottom-2 left-0 w-10 h-1 bg-gradient-to-r from-primary to-accent rounded-full" />
             </h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-[#F5A623] transition-colors flex items-center gap-2 group"
+                    className="text-white/70 hover:text-primary transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-0 h-0.5 bg-[#F5A623] group-hover:w-4 transition-all duration-300" />
+                    <span className="w-0 h-0.5 bg-primary group-hover:w-4 transition-all duration-300" />
                     {link.name}
                   </a>
                 </li>
@@ -97,18 +132,18 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <h4 className="text-lg font-bold mb-6 relative">
+            <h4 className="text-lg font-bold mb-6 relative text-primary">
               Vores Menu
-              <span className="absolute -bottom-2 left-0 w-10 h-1 bg-gradient-to-r from-[#D4382C] to-[#F5A623] rounded-full" />
+              <span className="absolute -bottom-2 left-0 w-10 h-1 bg-gradient-to-r from-primary to-accent rounded-full" />
             </h4>
             <ul className="space-y-3">
               {menuLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-[#F5A623] transition-colors flex items-center gap-2 group"
+                    className="text-white/70 hover:text-primary transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-0 h-0.5 bg-[#F5A623] group-hover:w-4 transition-all duration-300" />
+                    <span className="w-0 h-0.5 bg-primary group-hover:w-4 transition-all duration-300" />
                     {link.name}
                   </a>
                 </li>
@@ -125,38 +160,40 @@ const Footer = () => {
           >
             <h4 className="text-lg font-bold mb-6 relative">
               Kontakt Info
-              <span className="absolute -bottom-2 left-0 w-10 h-1 bg-gradient-to-r from-[#D4382C] to-[#F5A623] rounded-full" />
+              <span className="absolute -bottom-2 left-0 w-10 h-1 bg-gradient-to-r from-primary to-accent rounded-full" />
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin className="text-[#F5A623] flex-shrink-0 mt-1" size={18} />
-                <span className="text-gray-400">
-                  Hadsundvej 11
+                <MapPin className="text-primary flex-shrink-0 mt-1" size={18} />
+                <span className="text-white/70">
+                  {settings.address}
                   <br />
-                  9000 Aalborg, Danmark
+                  {settings.zipCode} {settings.city}, Danmark
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="text-[#F5A623]" size={18} />
+                <Phone className="text-primary" size={18} />
                 <a
-                  href="tel:+4598123456"
-                  className="text-gray-400 hover:text-[#F5A623] transition-colors"
+                  href={`tel:${settings.phone.replace(/\s/g, '')}`}
+                  className="text-white/70 hover:text-primary transition-colors"
                 >
-                  +45 98 12 34 56
+                  {settings.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="text-[#F5A623]" size={18} />
+                <Mail className="text-primary" size={18} />
                 <a
-                  href="mailto:info@sorrentopizza.dk"
-                  className="text-gray-400 hover:text-[#F5A623] transition-colors"
+                  href={`mailto:${settings.email}`}
+                  className="text-white/70 hover:text-primary transition-colors"
                 >
-                  info@sorrentopizza.dk
+                  {settings.email}
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Clock className="text-[#F5A623]" size={18} />
-                <span className="text-gray-400">Man-Søn: 11:00 - 22:00</span>
+                <Clock className="text-primary" size={18} />
+                <span className="text-white/70">
+                  Man-Søn: {settings.openTime} - {settings.closeTime}
+                </span>
               </li>
             </ul>
           </motion.div>
@@ -165,21 +202,21 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">
+            <p className="text-white/70 text-sm">
               © {currentYear} Sorrento Pizza Aalborg. Alle rettigheder forbeholdes.
             </p>
             <div className="flex gap-6 text-sm">
               <a
                 href="#"
-                className="text-gray-400 hover:text-[#F5A623] transition-colors"
+                className="text-white/70 hover:text-primary transition-colors"
               >
                 Privatlivspolitik
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-[#F5A623] transition-colors"
+                className="text-white/70 hover:text-primary transition-colors"
               >
                 Vilkår & Betingelser
               </a>

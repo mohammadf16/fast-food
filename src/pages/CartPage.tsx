@@ -12,20 +12,20 @@ const CartPage = () => {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-cream pt-32 pb-20">
+      <div className="min-h-screen bg-dark pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-20"
           >
-            <div className="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <ShoppingBag className="text-gray-400" size={60} />
+            <div className="w-32 h-32 bg-surface rounded-full flex items-center justify-center mx-auto mb-6">
+              <ShoppingBag className="text-muted" size={60} />
             </div>
-            <h1 className="text-4xl font-bold text-secondary mb-4">
+            <h1 className="text-4xl font-bold text-white mb-4">
               Din Kurv Er Tom
             </h1>
-            <p className="text-gray-600 mb-8">
+            <p className="text-muted mb-8">
               Tilføj nogle lækre pizzaer til din kurv for at fortsætte
             </p>
             <Link to="/">
@@ -45,7 +45,7 @@ const CartPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-cream pt-32 pb-20">
+    <div className="min-h-screen bg-dark pt-32 pb-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -60,10 +60,10 @@ const CartPage = () => {
             <ArrowLeft size={20} />
             Fortsæt med at handle
           </Link>
-          <h1 className="text-4xl md:text-5xl font-bold text-secondary">
+          <h1 className="text-4xl md:text-5xl font-bold text-white">
             Din Kurv
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-muted mt-2">
             {items.length} {items.length === 1 ? 'vare' : 'varer'} i kurven
           </p>
         </motion.div>
@@ -80,7 +80,7 @@ const CartPage = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+                  className="bg-surface rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-primary/10"
                 >
                   <div className="flex gap-6">
                     {/* Image */}
@@ -96,14 +96,14 @@ const CartPage = () => {
                     <div className="flex-1">
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <h3 className="text-xl font-bold text-secondary">
+                          <h3 className="text-xl font-bold text-white">
                             {item.name}
                           </h3>
-                          <p className="text-gray-500 text-sm">
+                          <p className="text-muted text-sm">
                             {item.description}
                           </p>
                           <div className="mt-2">
-                            <span className="inline-block bg-cream px-3 py-1 rounded-full text-sm font-medium text-primary">
+                            <span className="inline-block bg-surface-2 px-3 py-1 rounded-full text-sm font-medium text-primary">
                               {item.size}
                             </span>
                           </div>
@@ -120,17 +120,17 @@ const CartPage = () => {
 
                       {/* Quantity & Price */}
                       <div className="flex justify-between items-center mt-4">
-                        <div className="flex items-center gap-3 bg-cream rounded-full p-1">
+                        <div className="flex items-center gap-3 bg-surface-2 rounded-full p-1">
                           <motion.button
                             whileTap={{ scale: 0.9 }}
                             onClick={() =>
                               updateQuantity(item.id, item.size, item.quantity - 1)
                             }
-                            className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow hover:shadow-md transition-shadow"
+                            className="w-8 h-8 bg-dark rounded-full flex items-center justify-center shadow hover:shadow-md transition-shadow text-white"
                           >
                             <Minus size={16} />
                           </motion.button>
-                          <span className="font-bold text-lg w-8 text-center">
+                          <span className="font-bold text-lg w-8 text-center text-white">
                             {item.quantity}
                           </span>
                           <motion.button
@@ -138,7 +138,7 @@ const CartPage = () => {
                             onClick={() =>
                               updateQuantity(item.id, item.size, item.quantity + 1)
                             }
-                            className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow hover:shadow-md transition-shadow"
+                            className="w-8 h-8 bg-dark rounded-full flex items-center justify-center shadow hover:shadow-md transition-shadow text-white"
                           >
                             <Plus size={16} />
                           </motion.button>
@@ -147,7 +147,7 @@ const CartPage = () => {
                           <div className="text-2xl font-bold text-primary">
                             {(itemPrice * item.quantity).toFixed(0)} kr
                           </div>
-                          <div className="text-sm text-gray-500">
+                          <div className="text-sm text-muted">
                             {itemPrice.toFixed(0)} kr × {item.quantity}
                           </div>
                         </div>
@@ -164,18 +164,18 @@ const CartPage = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl p-6 shadow-lg sticky top-32"
+              className="bg-surface rounded-2xl p-6 shadow-lg sticky top-32 border border-primary/10"
             >
-              <h2 className="text-2xl font-bold text-secondary mb-6">
+              <h2 className="text-2xl font-bold text-white mb-6">
                 Ordre Oversigt
               </h2>
 
               <div className="space-y-4 mb-6">
-                <div className="flex justify-between text-gray-600">
+                <div className="flex justify-between text-muted">
                   <span>Subtotal</span>
                   <span className="font-semibold">{subtotal.toFixed(0)} kr</span>
                 </div>
-                <div className="flex justify-between text-gray-600">
+                <div className="flex justify-between text-muted">
                   <span>Levering</span>
                   <span className="font-semibold">
                     {deliveryFee === 0 ? (
@@ -186,13 +186,13 @@ const CartPage = () => {
                   </span>
                 </div>
                 {deliveryFee > 0 && (
-                  <div className="text-sm text-gray-500 bg-cream p-3 rounded-lg">
+                  <div className="text-sm text-muted bg-surface-2 p-3 rounded-lg">
                     💡 Tilføj {(150 - subtotal).toFixed(0)} kr mere for gratis levering
                   </div>
                 )}
                 <div className="border-t pt-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-xl font-bold text-secondary">Total</span>
+                    <span className="text-xl font-bold text-white">Total</span>
                     <span className="text-3xl font-bold text-primary">
                       {total.toFixed(0)} kr
                     </span>

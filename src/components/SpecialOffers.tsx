@@ -1,36 +1,13 @@
-import { motion } from 'framer-motion';
-import { Percent, Gift, Zap, ArrowRight } from 'lucide-react';
-
-const offers = [
-  {
-    icon: Percent,
-    badge: '20% OFF',
-    title: 'Student Rabat',
-    description: 'Vis dit studiekort og få 20% rabat på alle pizzaer',
-    color: 'from-blue-600 to-purple-600',
-    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80',
-  },
-  {
-    icon: Gift,
-    badge: 'KØB 2 FÅ 1',
-    title: 'Familie Deal',
-    description: 'Køb 2 store pizzaer og få en medium pizza gratis',
-    color: 'from-pink-600 to-rose-600',
-    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80',
-  },
-  {
-    icon: Zap,
-    badge: 'HURTIG DEAL',
-    title: 'Happy Hour',
-    description: 'Hver dag kl. 15-17: Alle pizzaer til halv pris!',
-    color: 'from-orange-600 to-red-600',
-    image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80',
-  },
-];
+﻿import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { offers } from '../data/offers';
 
 const SpecialOffers = () => {
+  const MotionLink = motion(Link);
+
   return (
-    <section className="py-20 bg-secondary relative overflow-hidden">
+    <section id="special-offers" className="py-20 bg-dark relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -66,19 +43,19 @@ const SpecialOffers = () => {
             transition={{ type: 'spring', stiffness: 200 }}
             className="inline-block mb-4"
           >
-            <span className="bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider shadow-lg">
-              🔥 Specielle Tilbud
+            <span className="bg-gradient-to-r from-primary to-accent text-dark px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider shadow-lg">
+              ًں”¥ Specielle Tilbud
             </span>
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-4 mb-4">
             Utrolige Tilbud
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-yellow-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               Kun For Dig!
             </span>
           </h2>
-          <p className="text-gray-300 max-w-2xl mx-auto">
-            Grib disse fantastiske tilbud, før de udløber
+          <p className="text-white/70 max-w-2xl mx-auto">
+            Grib disse fantastiske tilbud, fأ¸r de udlأ¸ber
           </p>
         </motion.div>
 
@@ -94,7 +71,7 @@ const SpecialOffers = () => {
               whileHover={{ y: -10 }}
               className="group relative"
             >
-              <div className="relative overflow-hidden rounded-3xl bg-white shadow-2xl">
+              <div className="relative overflow-hidden rounded-3xl bg-white/5 border border-white/10 shadow-2xl">
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">
                   <motion.img
@@ -125,22 +102,23 @@ const SpecialOffers = () => {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-secondary mb-2">
+                  <h3 className="text-xl font-bold text-white mb-2">
                     {offer.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">
+                  <p className="text-white/70 mb-4 leading-relaxed">
                     {offer.description}
                   </p>
 
                   {/* CTA Button */}
-                  <motion.button
+                  <MotionLink
+                    to={`/offers/${offer.id}`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className={`w-full bg-gradient-to-r ${offer.color} text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-shadow`}
                   >
                     Bestil Nu
                     <ArrowRight size={18} />
-                  </motion.button>
+                  </MotionLink>
                 </div>
 
                 {/* Glow Effect */}
@@ -157,14 +135,14 @@ const SpecialOffers = () => {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <p className="text-gray-300 mb-4">
-            Tilbuddene er gyldige i begrænset tid. Skyn dig!
+          <p className="text-white/70 mb-4">
+            Tilbuddene er gyldige i begrأ¦nset tid. Skyn dig!
           </p>
           <motion.a
             href="#menu"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 bg-white text-secondary px-8 py-4 rounded-full font-bold hover:bg-cream transition-colors shadow-xl"
+            className="inline-flex items-center gap-2 bg-primary text-black px-8 py-4 rounded-full font-bold hover:bg-primary/90 transition-colors shadow-xl"
           >
             Se Hele Menuen
             <ArrowRight size={20} />
@@ -176,3 +154,4 @@ const SpecialOffers = () => {
 };
 
 export default SpecialOffers;
+

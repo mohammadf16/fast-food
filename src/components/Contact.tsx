@@ -1,32 +1,75 @@
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Clock, Mail, Send } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: 'Adresse',
-    details: ['Hadsundvej 11', '9000 Aalborg, Danmark'],
-  },
-  {
-    icon: Phone,
-    title: 'Telefon',
-    details: ['+45 98 12 34 56'],
-  },
-  {
-    icon: Clock,
-    title: 'Åbningstider',
-    details: ['Man-Tors: 11:00 - 22:00', 'Fre-Søn: 11:00 - 23:00'],
-  },
-  {
-    icon: Mail,
-    title: 'Email',
-    details: ['info@sorrentopizza.dk'],
-  },
-];
+interface ContactInfoItem {
+  icon: typeof MapPin;
+  title: string;
+  details: string[];
+}
 
 const Contact = () => {
+  const [contactInfo, setContactInfo] = useState<ContactInfoItem[]>([
+    {
+      icon: MapPin,
+      title: 'Adresse',
+      details: ['Hadsundvej 11', '9000 Aalborg, Danmark'],
+    },
+    {
+      icon: Phone,
+      title: 'Telefon',
+      details: ['+45 98 12 34 56'],
+    },
+    {
+      icon: Clock,
+      title: 'Åbningstider',
+      details: ['Man-Søn: 11:00 - 22:00'],
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      details: ['info@sorrentopizza.dk'],
+    },
+  ]);
+
+  useEffect(() => {
+    const savedSettings = localStorage.getItem('restaurantSettings');
+    if (savedSettings) {
+      try {
+        const s = JSON.parse(savedSettings);
+        const addressLine2 =
+          s.zipCode && s.city ? `${s.zipCode} ${s.city}, Danmark` : 'Danmark';
+        setContactInfo([
+          {
+            icon: MapPin,
+            title: 'Adresse',
+            details: [s.address || 'Hadsundvej 11', addressLine2],
+          },
+          {
+            icon: Phone,
+            title: 'Telefon',
+            details: [s.phone || '+45 98 12 34 56'],
+          },
+          {
+            icon: Clock,
+            title: 'Åbningstider',
+            details: [
+              `Man-Søn: ${s.openTime || '11:00'} - ${s.closeTime || '22:00'}`,
+            ],
+          },
+          {
+            icon: Mail,
+            title: 'Email',
+            details: [s.email || 'info@sorrentopizza.dk'],
+          },
+        ]);
+      } catch {
+        // ignore
+      }
+    }
+  }, []);
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-20 bg-dark">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <motion.div
@@ -39,16 +82,16 @@ const Contact = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-[#D4382C] font-semibold text-sm uppercase tracking-wider"
+            className="text-primary font-semibold text-sm uppercase tracking-wider"
           >
             Kontakt Os
           </motion.span>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1A1A2E] mt-2 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
             Vi Glæder Os Til
             <br />
             At Høre Fra Dig
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-white/80 max-w-2xl mx-auto">
             Har du spørgsmål eller ønsker du at lave en reservation? Kontakt os
             i dag!
           </p>
@@ -60,51 +103,51 @@ const Contact = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-[#FFF8F0] rounded-3xl p-8"
+            className="bg-surface rounded-3xl p-8 border border-primary/10"
           >
-            <h3 className="text-2xl font-bold text-[#1A1A2E] mb-6">
+            <h3 className="text-2xl font-bold text-white mb-6">
               Send Os En Besked
             </h3>
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-muted mb-2">
                     Navn
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#D4382C] focus:ring-2 focus:ring-[#D4382C]/20 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-surface-2 bg-dark focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition-all text-white placeholder:text-muted"
                     placeholder="Dit navn"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-muted mb-2">
                     Telefon
                   </label>
                   <input
                     type="tel"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#D4382C] focus:ring-2 focus:ring-[#D4382C]/20 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-surface-2 bg-dark focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition-all text-white placeholder:text-muted"
                     placeholder="Dit telefonnummer"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-muted mb-2">
                   Email
                 </label>
                 <input
                   type="email"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#D4382C] focus:ring-2 focus:ring-[#D4382C]/20 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-surface-2 bg-dark focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition-all text-white placeholder:text-muted"
                   placeholder="din@email.dk"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-muted mb-2">
                   Besked
                 </label>
                 <textarea
                   rows={4}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#D4382C] focus:ring-2 focus:ring-[#D4382C]/20 outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-surface-2 bg-dark focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition-all resize-none text-white placeholder:text-muted"
                   placeholder="Din besked..."
                 />
               </div>
@@ -112,7 +155,7 @@ const Contact = () => {
                 type="submit"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-[#D4382C] to-[#F5A623] text-white py-4 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-shadow"
+                className="w-full bg-gradient-to-r from-primary to-accent text-black py-4 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-shadow"
               >
                 <Send size={20} />
                 Send Besked
@@ -128,7 +171,7 @@ const Contact = () => {
             className="space-y-8"
           >
             {/* Contact Cards */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={info.title}
@@ -136,16 +179,16 @@ const Contact = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-[#FFF8F0] rounded-2xl p-6 hover:shadow-lg transition-shadow"
+                  className="bg-surface rounded-2xl p-6 hover:shadow-lg transition-shadow border border-primary/10"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#D4382C] to-[#F5A623] rounded-xl flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center mb-4">
                     <info.icon className="text-white" size={24} />
                   </div>
-                  <h4 className="font-semibold text-[#1A1A2E] mb-2">
+                  <h4 className="font-semibold text-white mb-2">
                     {info.title}
                   </h4>
                   {info.details.map((detail, i) => (
-                    <p key={i} className="text-gray-600 text-sm">
+                    <p key={i} className="text-muted text-sm">
                       {detail}
                     </p>
                   ))}

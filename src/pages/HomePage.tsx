@@ -47,7 +47,7 @@ const EpicLoader = () => {
 
   return (
     <motion.div 
-      className="fixed inset-0 z-[100] bg-gradient-to-br from-[#1A1A2E] via-[#2D2D44] to-[#1A1A2E] flex items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-[100] bg-gradient-to-br from-dark via-secondary to-dark flex items-center justify-center overflow-hidden"
       exit={{ opacity: 0, scale: 1.1 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
     >
@@ -107,13 +107,13 @@ const EpicLoader = () => {
           transition={{ type: "spring", duration: 1, bounce: 0.5 }}
           className="relative mb-8"
         >
-          <motion.div 
-            className="w-32 h-32 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center shadow-2xl"
+            <motion.div 
+              className="w-32 h-32 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center shadow-2xl"
             animate={{ 
               boxShadow: [
-                '0 0 30px rgba(212, 56, 44, 0.5)',
-                '0 0 60px rgba(245, 166, 35, 0.5)',
-                '0 0 30px rgba(212, 56, 44, 0.5)'
+                '0 0 30px rgba(212, 175, 55, 0.45)',
+                '0 0 60px rgba(245, 208, 111, 0.6)',
+                '0 0 30px rgba(212, 175, 55, 0.45)'
               ]
             }}
             transition={{ duration: 2, repeat: Infinity }}
@@ -308,8 +308,8 @@ const SmartNotification = () => {
               notification.type === 'warning' 
                 ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white'
                 : notification.type === 'info'
-                ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
-                : 'bg-white text-secondary border border-gray-100'
+                ? 'bg-gradient-to-r from-dark to-secondary text-white'
+                : 'bg-surface text-white border border-primary/30'
             }`}
             whileHover={{ scale: 1.02 }}
           >
@@ -406,7 +406,7 @@ const ScrollToTop = () => {
                 cy="28"
                 r="24"
                 fill="none"
-                stroke="#F5A623"
+                stroke="#D4AF37"
                 strokeWidth="3"
                 strokeDasharray={150}
                 strokeDashoffset={150 - (scrollProgress * 1.5)}

@@ -53,7 +53,7 @@ const FloatingOrderButton = () => {
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg"
+                  className="absolute -top-2 -right-2 w-6 h-6 bg-danger rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg"
                 >
                   {getTotalItems()}
                 </motion.div>
@@ -91,7 +91,7 @@ const FloatingOrderButton = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25 }}
-              className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl z-50 flex flex-col"
+              className="fixed right-0 top-0 h-full w-full max-w-md bg-surface shadow-2xl z-50 flex flex-col"
             >
               {/* Header */}
               <div className="bg-gradient-to-r from-primary to-accent p-6 text-white">
@@ -115,10 +115,10 @@ const FloatingOrderButton = () => {
               <div className="flex-1 overflow-y-auto p-6">
                 {getTotalItems() === 0 ? (
                   <div className="text-center py-12">
-                    <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <ShoppingBag className="text-gray-400" size={40} />
+                    <div className="w-24 h-24 bg-surface-2 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <ShoppingBag className="text-muted" size={40} />
                     </div>
-                    <p className="text-gray-500 mb-6">
+                    <p className="text-muted mb-6">
                       Du har ikke tilføjet noget endnu
                     </p>
                     <motion.button
@@ -142,7 +142,7 @@ const FloatingOrderButton = () => {
                           key={`${item.id}-${item.size}`}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="flex gap-4 bg-cream p-4 rounded-xl"
+                          className="flex gap-4 bg-surface-2 p-4 rounded-xl"
                         >
                           <img
                             src={item.image}
@@ -150,23 +150,23 @@ const FloatingOrderButton = () => {
                             className="w-20 h-20 rounded-lg object-cover"
                           />
                           <div className="flex-1">
-                            <h3 className="font-bold text-secondary">{item.name}</h3>
-                            <p className="text-sm text-gray-500">{item.size}</p>
+                            <h3 className="font-bold text-white">{item.name}</h3>
+                            <p className="text-sm text-muted">{item.size}</p>
                             <p className="text-primary font-bold mt-1">{(itemPrice * item.quantity).toFixed(0)} kr</p>
                           </div>
                           <div className="flex flex-col items-center justify-center gap-2">
                             <motion.button
                               whileTap={{ scale: 0.9 }}
                               onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
-                              className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow"
+                              className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center shadow text-white"
                             >
                               <Plus size={16} />
                             </motion.button>
-                            <span className="font-bold">{item.quantity}</span>
+                            <span className="font-bold text-white">{item.quantity}</span>
                             <motion.button
                               whileTap={{ scale: 0.9 }}
                               onClick={() => updateQuantity(item.id, item.size, item.quantity - 1)}
-                              className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow"
+                              className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center shadow text-white"
                             >
                               <Minus size={16} />
                             </motion.button>
@@ -175,7 +175,7 @@ const FloatingOrderButton = () => {
                       );
                     })}
                     {items.length > 3 && (
-                      <p className="text-center text-sm text-gray-500">
+                      <p className="text-center text-sm text-muted">
                         +{items.length - 3} flere varer
                       </p>
                     )}
@@ -185,10 +185,10 @@ const FloatingOrderButton = () => {
 
               {/* Footer */}
               {getTotalItems() > 0 && (
-                <div className="border-t p-6 bg-gray-50">
+                <div className="border-t border-white/10 p-6 bg-secondary">
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-gray-600">Subtotal:</span>
-                    <span className="text-2xl font-bold text-secondary">{getTotalPrice().toFixed(0)} kr</span>
+                    <span className="text-muted">Subtotal:</span>
+                    <span className="text-2xl font-bold text-white">{getTotalPrice().toFixed(0)} kr</span>
                   </div>
                   <motion.button
                     whileHover={{ scale: 1.02 }}

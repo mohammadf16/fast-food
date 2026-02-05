@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+﻿import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import { useState, useEffect } from 'react';
@@ -18,10 +18,13 @@ import OrderTrackingPage from './pages/OrderTrackingPage';
 import AdminDashboard from './pages/AdminDashboard';
 import NotFoundPage from './pages/NotFoundPage';
 import MenuPage from './pages/MenuPage';
+import OfferDetailsPage from './pages/OfferDetailsPage';
+import OffersPage from './pages/OffersPage';
 import AboutPage from './pages/AboutPage';
 import GalleryPage from './pages/GalleryPage';
 import ContactPage from './pages/ContactPage';
 import PizzaBuilderPage from './pages/PizzaBuilderPage';
+import AdminIngredientsManager from './pages/AdminIngredientsManager';
 import AdminMenuManager from './pages/AdminMenuManager';
 import AdminSettings from './pages/AdminSettings';
 
@@ -61,8 +64,8 @@ const NightModeOverlay = () => {
     <>
       {/* Subtle night overlay - doesn't block interaction */}
       <div className="fixed inset-0 z-[5] pointer-events-none">
-        {/* Very subtle dark tint */}
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-950/30 via-purple-950/20 to-indigo-950/30" />
+        {/* Very subtle dark tint in black-gold palette */}
+        <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-secondary/60 to-dark/80" />
         
         {/* Subtle stars - fewer and more transparent */}
         {stars.map((star) => (
@@ -101,28 +104,28 @@ const NightModeOverlay = () => {
       </div>
 
       {/* Small floating badge - minimal and non-intrusive */}
-      <motion.div
-        initial={{ x: 100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        className="fixed bottom-24 right-4 z-[85] pointer-events-auto"
-      >
-        <div className="bg-indigo-900/90 backdrop-blur-xl rounded-xl px-4 py-3 border border-purple-500/30 shadow-xl max-w-xs">
+        <motion.div
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          className="fixed bottom-24 right-4 z-[85] pointer-events-auto"
+        >
+        <div className="bg-secondary/95 backdrop-blur-xl rounded-xl px-4 py-3 border border-primary/40 shadow-xl max-w-xs">
           <div className="flex items-center gap-3">
-            <motion.div
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="w-8 h-8 bg-gradient-to-br from-yellow-300 to-yellow-500 rounded-full flex items-center justify-center flex-shrink-0"
-            >
-              <Moon size={16} className="text-yellow-800" />
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <Moon size={16} className="text-secondary" />
             </motion.div>
             <div className="min-w-0">
               <p className="text-white text-sm font-medium truncate">
-                {settings.closedModeType === 'preorder' ? '📦 Forudbestilling aktiv' : '🌙 Lukket'}
+                {settings.closedModeType === 'preorder' ? 'ًں“¦ Forudbestilling aktiv' : 'ًںŒ™ Lukket'}
               </p>
-              <p className="text-purple-300 text-xs truncate">
+              <p className="text-muted text-xs truncate">
                 {settings.reopenDate 
-                  ? `Åbner ${new Date(settings.reopenDate).toLocaleDateString('da-DK', { day: 'numeric', month: 'short' })}`
-                  : settings.closedModeMessage || 'Vi åbner snart'
+                  ? `أ…bner ${new Date(settings.reopenDate).toLocaleDateString('da-DK', { day: 'numeric', month: 'short' })}`
+                  : settings.closedModeMessage || 'Vi أ¥bner snart'
                 }
               </p>
             </div>
@@ -141,6 +144,8 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<MenuPage />} />
+        <Route path="/offers" element={<OffersPage />} />
+        <Route path="/offers/:offerId" element={<OfferDetailsPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/contact" element={<ContactPage />} />
@@ -154,6 +159,7 @@ function AppContent() {
         <Route path="/order-tracking/:orderId" element={<OrderTrackingPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/menu" element={<AdminMenuManager />} />
+        <Route path="/admin/ingredients" element={<AdminIngredientsManager />} />
         <Route path="/admin/settings" element={<AdminSettings />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
@@ -164,6 +170,24 @@ function AppContent() {
 }
 
 function App() {
+  // Load theme colors from admin settings (localStorage) and apply to CSS variables
+  useEffect(() => {
+    const savedSettings = localStorage.getItem('restaurantSettings');
+    if (savedSettings) {
+      try {
+        const settings = JSON.parse(savedSettings);
+        if (settings.primaryColor) {
+          document.documentElement.style.setProperty('--color-primary', settings.primaryColor);
+        }
+        if (settings.accentColor) {
+          document.documentElement.style.setProperty('--color-accent', settings.accentColor);
+        }
+      } catch {
+        // ignore parsing errors â€“ fall back to default colors
+      }
+    }
+  }, []);
+
   return (
     <Router>
       <AuthProvider>
@@ -176,3 +200,7 @@ function App() {
 }
 
 export default App;
+
+
+
+

@@ -22,7 +22,7 @@ const OrderConfirmationPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-cream pt-32 pb-20">
+    <div className="min-h-screen bg-dark pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-6">
         {/* Success Animation */}
         <motion.div
@@ -38,7 +38,7 @@ const OrderConfirmationPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-4xl md:text-5xl font-bold text-secondary mb-4"
+            className="text-4xl md:text-5xl font-bold text-white mb-4"
           >
             Tak for din bestilling!
           </motion.h1>
@@ -46,7 +46,7 @@ const OrderConfirmationPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-xl text-gray-600"
+            className="text-xl text-muted"
           >
             Din ordre er modtaget og bliver tilberedt
           </motion.p>
@@ -57,9 +57,9 @@ const OrderConfirmationPage = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-gradient-to-r from-primary to-accent text-white rounded-2xl p-8 text-center mb-8 shadow-xl"
+          className="bg-gradient-to-r from-primary to-accent text-black rounded-2xl p-8 text-center mb-8 shadow-xl"
         >
-          <p className="text-sm uppercase tracking-wider mb-2 opacity-90">
+          <p className="text-sm uppercase tracking-wider mb-2 opacity-70">
             Ordre Nummer
           </p>
           <p className="text-5xl font-bold tracking-wider">#{orderNumber}</p>
@@ -70,9 +70,9 @@ const OrderConfirmationPage = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="bg-white rounded-2xl p-8 shadow-lg mb-8"
+          className="bg-surface rounded-2xl p-8 shadow-lg mb-8 border border-primary/10"
         >
-          <h2 className="text-2xl font-bold text-secondary mb-6">
+          <h2 className="text-2xl font-bold text-white mb-6">
             Ordre Status
           </h2>
           <div className="space-y-6">

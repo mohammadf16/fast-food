@@ -239,24 +239,24 @@ const MenuPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-cream pt-24 pb-12">
+    <div className="min-h-screen bg-dark pt-24 pb-12">
       <Toast 
         message="Tilføjet til kurven! 🍕"
         isVisible={showToast}
         onClose={() => setShowToast(false)}
       />
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
-            Vores <span className="text-primary">Menu</span>
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+            Vores Menu
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-muted max-w-2xl mx-auto">
             Udforsk vores udvalg af autentiske italienske pizzaer og lækkerier
           </p>
         </motion.div>
@@ -264,13 +264,13 @@ const MenuPage = () => {
         {/* Search and Filter Bar */}
         <div className="mb-8 flex flex-col md:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={20} />
             <input
               type="text"
               placeholder="Søg efter pizza eller ingrediens..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none bg-white"
+              className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-white/10 focus:border-primary focus:outline-none bg-surface text-white placeholder:text-muted"
             />
           </div>
           <motion.button
@@ -278,7 +278,7 @@ const MenuPage = () => {
             whileTap={{ scale: 0.98 }}
             onClick={() => setShowFilters(!showFilters)}
             className={`px-6 py-3 rounded-xl flex items-center gap-2 ${
-              showFilters ? 'bg-primary text-white' : 'bg-white text-gray-700 border-2 border-gray-200'
+              showFilters ? 'bg-primary text-dark' : 'bg-surface text-muted border-2 border-white/10'
             }`}
           >
             <Filter size={20} />
@@ -296,33 +296,33 @@ const MenuPage = () => {
               exit={{ opacity: 0, height: 0 }}
               className="mb-8 overflow-hidden"
             >
-              <div className="bg-white p-6 rounded-2xl shadow-lg flex flex-wrap gap-4">
-                <label className="flex items-center gap-2 cursor-pointer">
+              <div className="bg-surface p-6 rounded-2xl shadow-lg flex flex-wrap gap-4">
+                <label className="flex items-center gap-2 cursor-pointer text-white">
                   <input
                     type="checkbox"
                     checked={filters.spicy}
                     onChange={(e) => setFilters({ ...filters, spicy: e.target.checked })}
-                    className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                    className="w-5 h-5 rounded border-white/20 text-primary focus:ring-primary bg-surface"
                   />
                   <Flame size={18} className="text-primary" />
                   <span>Stærk</span>
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2 cursor-pointer text-white">
                   <input
                     type="checkbox"
                     checked={filters.vegan}
                     onChange={(e) => setFilters({ ...filters, vegan: e.target.checked })}
-                    className="w-5 h-5 rounded border-gray-300 text-green-500 focus:ring-green-500"
+                    className="w-5 h-5 rounded border-white/20 text-green-500 focus:ring-green-500 bg-surface"
                   />
                   <Leaf size={18} className="text-green-500" />
                   <span>Vegansk</span>
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2 cursor-pointer text-white">
                   <input
                     type="checkbox"
                     checked={filters.popular}
                     onChange={(e) => setFilters({ ...filters, popular: e.target.checked })}
-                    className="w-5 h-5 rounded border-gray-300 text-accent focus:ring-accent"
+                    className="w-5 h-5 rounded border-white/20 text-accent focus:ring-accent bg-surface"
                   />
                   <Star size={18} className="text-accent fill-accent" />
                   <span>Populær</span>
@@ -343,8 +343,8 @@ const MenuPage = () => {
                 onClick={() => setActiveCategory(category)}
                 className={`px-5 py-2.5 rounded-full font-medium transition-all whitespace-nowrap ${
                   activeCategory === category
-                    ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                    ? 'bg-gradient-to-r from-primary to-accent text-dark shadow-lg'
+                    : 'bg-surface text-muted hover:bg-surface-2'
                 }`}
               >
                 {category}
@@ -354,7 +354,7 @@ const MenuPage = () => {
         </div>
 
         {/* Results Count */}
-        <p className="text-gray-500 mb-6">
+        <p className="text-muted mb-6">
           Viser {filteredItems.length} {filteredItems.length === 1 ? 'resultat' : 'resultater'}
         </p>
 
@@ -370,7 +370,7 @@ const MenuPage = () => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 whileHover={{ y: -5 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg group"
+                className="bg-surface rounded-2xl overflow-hidden shadow-lg group"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -406,21 +406,21 @@ const MenuPage = () => {
 
                   {/* Price */}
                   <div className="absolute bottom-3 right-3">
-                    <span className="bg-white text-primary font-bold px-3 py-1.5 rounded-full shadow-lg">
+                    <span className="bg-secondary text-primary font-bold px-3 py-1.5 rounded-full shadow-lg">
                       {item.price} kr
                     </span>
                   </div>
                 </div>
 
                 <div className="p-5">
-                  <h3 className="text-lg font-bold text-secondary mb-1">{item.name}</h3>
-                  <p className="text-gray-500 text-sm mb-4 line-clamp-2">{item.description}</p>
+                  <h3 className="text-lg font-bold text-white mb-1">{item.name}</h3>
+                  <p className="text-muted text-sm mb-4 line-clamp-2">{item.description}</p>
                   
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setSelectedItem(item)}
-                    className="w-full bg-secondary text-white py-2.5 rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-primary transition-colors"
+                    className="w-full bg-primary text-secondary py-2.5 rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-accent transition-colors"
                   >
                     <ShoppingCart size={18} />
                     Tilføj
@@ -433,7 +433,7 @@ const MenuPage = () => {
 
         {filteredItems.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Ingen resultater fundet</p>
+            <p className="text-muted text-lg">Ingen resultater fundet</p>
             <button
               onClick={() => {
                 setSearchQuery('');
@@ -464,7 +464,7 @@ const MenuPage = () => {
               initial={{ opacity: 0, scale: 0.9, y: 50 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 50 }}
-              className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
+              className="relative w-full max-w-lg bg-surface rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
             >
               <div className="relative h-56">
                 <img
@@ -476,9 +476,9 @@ const MenuPage = () => {
                 
                 <button
                   onClick={() => setSelectedItem(null)}
-                  className="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white"
+                  className="absolute top-4 right-4 w-10 h-10 bg-secondary/90 rounded-full flex items-center justify-center hover:bg-secondary"
                 >
-                  <X size={20} />
+                  <X size={20} className="text-white" />
                 </button>
 
                 <div className="absolute bottom-4 left-6 right-6">
@@ -491,12 +491,12 @@ const MenuPage = () => {
                 {/* Ingredients */}
                 {selectedItem.ingredients && (
                   <div className="mb-6">
-                    <h4 className="font-semibold text-secondary mb-2">Ingredienser:</h4>
+                    <h4 className="font-semibold text-white mb-2">Ingredienser:</h4>
                     <div className="flex flex-wrap gap-2">
                       {selectedItem.ingredients.map((ing) => (
                         <span
                           key={ing}
-                          className="bg-cream text-gray-700 px-3 py-1 rounded-full text-sm"
+                          className="bg-surface-2 text-muted px-3 py-1 rounded-full text-sm"
                         >
                           {ing}
                         </span>
@@ -508,7 +508,7 @@ const MenuPage = () => {
                 {/* Size Selection (only for food items) */}
                 {!['Drikkevarer', 'Tilbehør'].includes(selectedItem.category) && (
                   <div className="mb-6">
-                    <h4 className="font-semibold text-secondary mb-3">Vælg størrelse:</h4>
+                    <h4 className="font-semibold text-white mb-3">Vælg størrelse:</h4>
                     <div className="grid grid-cols-3 gap-3">
                       {(['Small', 'Medium', 'Large'] as const).map((size) => {
                         const multiplier = size === 'Large' ? 1.3 : size === 'Medium' ? 1.15 : 1;
@@ -520,15 +520,15 @@ const MenuPage = () => {
                             onClick={() => setSelectedSize(size)}
                             className={`p-3 rounded-xl border-2 transition-all ${
                               selectedSize === size
-                                ? 'border-primary bg-primary/5'
-                                : 'border-gray-200 hover:border-gray-300'
+                                ? 'border-primary bg-primary/10'
+                                : 'border-white/10 hover:border-white/20'
                             }`}
                           >
                             <div className="text-center">
-                              <div className="font-bold text-secondary">
+                              <div className="font-bold text-white">
                                 {size === 'Small' ? 'Lille' : size === 'Medium' ? 'Medium' : 'Stor'}
                               </div>
-                              <div className="text-sm text-gray-500">
+                              <div className="text-sm text-muted">
                                 {size === 'Small' ? '25 cm' : size === 'Medium' ? '30 cm' : '35 cm'}
                               </div>
                               <div className="text-primary font-semibold mt-1">{price} kr</div>
@@ -544,7 +544,7 @@ const MenuPage = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleAddToCart}
-                  className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-primary to-accent text-dark py-4 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2"
                 >
                   <ShoppingCart size={20} />
                   Tilføj til Kurv

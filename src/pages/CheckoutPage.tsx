@@ -231,7 +231,7 @@ const CheckoutPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-cream pt-32 pb-20">
+    <div className="min-h-screen bg-dark pt-32 pb-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -241,15 +241,15 @@ const CheckoutPage = () => {
         >
           <Link
             to="/cart"
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-primary transition-colors mb-4"
+            className="inline-flex items-center gap-2 text-white/70 hover:text-primary transition-colors mb-4"
           >
             <ArrowLeft size={20} />
             Tilbage til Kurv
           </Link>
-          <h1 className="text-4xl md:text-5xl font-bold text-secondary">
+          <h1 className="text-4xl md:text-5xl font-bold text-white">
             Checkout
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-white/70 mt-2">
             Udfyld dine oplysninger for at gennemføre bestillingen
           </p>
         </motion.div>
@@ -262,20 +262,20 @@ const CheckoutPage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-2xl p-6 shadow-lg"
+                className="bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg"
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
                     <User className="text-primary" size={20} />
                   </div>
-                  <h2 className="text-2xl font-bold text-secondary">
+                  <h2 className="text-2xl font-bold text-white">
                     Personlige Oplysninger
                   </h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Fornavn *
                     </label>
                     <input
@@ -283,18 +283,18 @@ const CheckoutPage = () => {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${
-                        errors.firstName ? 'border-red-500' : 'border-gray-200'
+                      className={`w-full px-4 py-3 rounded-xl border bg-black/30 text-white placeholder:text-white/40 ${
+                        errors.firstName ? 'border-primary' : 'border-white/10'
                       } focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all`}
                       placeholder="Dit fornavn"
                     />
                     {errors.firstName && (
-                      <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+                      <p className="text-primary text-sm mt-1">{errors.firstName}</p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Efternavn *
                     </label>
                     <input
@@ -302,23 +302,23 @@ const CheckoutPage = () => {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${
-                        errors.lastName ? 'border-red-500' : 'border-gray-200'
+                      className={`w-full px-4 py-3 rounded-xl border bg-black/30 text-white placeholder:text-white/40 ${
+                        errors.lastName ? 'border-primary' : 'border-white/10'
                       } focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all`}
                       placeholder="Dit efternavn"
                     />
                     {errors.lastName && (
-                      <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+                      <p className="text-primary text-sm mt-1">{errors.lastName}</p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Email *
                     </label>
                     <div className="relative">
                       <Mail
-                        className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
                         size={20}
                       />
                       <input
@@ -326,24 +326,24 @@ const CheckoutPage = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`w-full pl-11 pr-4 py-3 rounded-xl border ${
-                          errors.email ? 'border-red-500' : 'border-gray-200'
+                        className={`w-full pl-11 pr-4 py-3 rounded-xl border bg-black/30 text-white placeholder:text-white/40 ${
+                          errors.email ? 'border-primary' : 'border-white/10'
                         } focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all`}
                         placeholder="din@email.dk"
                       />
                     </div>
                     {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                      <p className="text-primary text-sm mt-1">{errors.email}</p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Telefon *
                     </label>
                     <div className="relative">
                       <Phone
-                        className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
                         size={20}
                       />
                       <input
@@ -351,14 +351,14 @@ const CheckoutPage = () => {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className={`w-full pl-11 pr-4 py-3 rounded-xl border ${
-                          errors.phone ? 'border-red-500' : 'border-gray-200'
+                        className={`w-full pl-11 pr-4 py-3 rounded-xl border bg-black/30 text-white placeholder:text-white/40 ${
+                          errors.phone ? 'border-primary' : 'border-white/10'
                         } focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all`}
                         placeholder="12345678"
                       />
                     </div>
                     {errors.phone && (
-                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                      <p className="text-primary text-sm mt-1">{errors.phone}</p>
                     )}
                   </div>
                 </div>
@@ -369,20 +369,20 @@ const CheckoutPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-lg"
+                className="bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg"
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
                     <MapPin className="text-primary" size={20} />
                   </div>
-                  <h2 className="text-2xl font-bold text-secondary">
+                  <h2 className="text-2xl font-bold text-white">
                     Leveringsadresse
                   </h2>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Adresse *
                     </label>
                     <input
@@ -390,19 +390,19 @@ const CheckoutPage = () => {
                       name="address"
                       value={formData.address}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${
-                        errors.address ? 'border-red-500' : 'border-gray-200'
+                      className={`w-full px-4 py-3 rounded-xl border bg-black/30 text-white placeholder:text-white/40 ${
+                        errors.address ? 'border-primary' : 'border-white/10'
                       } focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all`}
                       placeholder="Gadenavn og nummer"
                     />
                     {errors.address && (
-                      <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+                      <p className="text-primary text-sm mt-1">{errors.address}</p>
                     )}
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         Postnummer *
                       </label>
                       <input
@@ -410,18 +410,18 @@ const CheckoutPage = () => {
                         name="zipCode"
                         value={formData.zipCode}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-xl border ${
-                          errors.zipCode ? 'border-red-500' : 'border-gray-200'
+                        className={`w-full px-4 py-3 rounded-xl border bg-black/30 text-white placeholder:text-white/40 ${
+                          errors.zipCode ? 'border-primary' : 'border-white/10'
                         } focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all`}
                         placeholder="9000"
                       />
                       {errors.zipCode && (
-                        <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>
+                        <p className="text-primary text-sm mt-1">{errors.zipCode}</p>
                       )}
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-white/80 mb-2">
                         By
                       </label>
                       <input
@@ -429,14 +429,14 @@ const CheckoutPage = () => {
                         name="city"
                         value={formData.city}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-black/30 text-white placeholder:text-white/40 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                         placeholder="Aalborg"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">
                       Leveringsnoter (valgfrit)
                     </label>
                     <textarea
@@ -444,7 +444,7 @@ const CheckoutPage = () => {
                       value={formData.deliveryNotes}
                       onChange={handleChange}
                       rows={3}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-white/10 bg-black/30 text-white placeholder:text-white/40 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
                       placeholder="F.eks. ring på dørklokken, 2. sal..."
                     />
                   </div>
@@ -456,13 +456,13 @@ const CheckoutPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="bg-white rounded-2xl p-6 shadow-lg"
+                className="bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg"
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
                     <Clock className="text-primary" size={20} />
                   </div>
-                  <h2 className="text-2xl font-bold text-secondary">
+                  <h2 className="text-2xl font-bold text-white">
                     Leveringstid
                   </h2>
                 </div>
@@ -473,7 +473,7 @@ const CheckoutPage = () => {
                     className={`flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all ${
                       formData.deliveryType === 'asap' 
                         ? 'border-primary bg-primary/5' 
-                        : 'border-gray-200 hover:border-primary/50'
+                        : 'border-white/10 hover:border-primary/50'
                     }`}
                   >
                     <input
@@ -484,12 +484,12 @@ const CheckoutPage = () => {
                       onChange={handleChange}
                       className="w-5 h-5 text-primary"
                     />
-                    <Zap size={24} className="text-accent" />
+                    <Zap size={24} className="text-primary" />
                     <div className="flex-1">
-                      <span className="font-semibold block">Så hurtigt som muligt</span>
-                      <span className="text-sm text-gray-500">Estimeret: 30-45 minutter</span>
+                      <span className="font-semibold block text-white">Så hurtigt som muligt</span>
+                      <span className="text-sm text-white/60">Estimeret: 30-45 minutter</span>
                     </div>
-                    <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+                    <span className="text-xs bg-primary/20 text-primary border border-primary/40 px-2 py-1 rounded-full font-medium">
                       Anbefalet
                     </span>
                   </label>
@@ -499,7 +499,7 @@ const CheckoutPage = () => {
                     className={`flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all ${
                       formData.deliveryType === 'scheduled' 
                         ? 'border-primary bg-primary/5' 
-                        : 'border-gray-200 hover:border-primary/50'
+                        : 'border-white/10 hover:border-primary/50'
                     }`}
                   >
                     <input
@@ -510,10 +510,10 @@ const CheckoutPage = () => {
                       onChange={handleChange}
                       className="w-5 h-5 text-primary"
                     />
-                    <Calendar size={24} className="text-blue-500" />
+                    <Calendar size={24} className="text-primary" />
                     <div className="flex-1">
-                      <span className="font-semibold block">Planlæg levering</span>
-                      <span className="text-sm text-gray-500">Vælg dato og tidspunkt</span>
+                      <span className="font-semibold block text-white">Planlæg levering</span>
+                      <span className="text-sm text-white/60">Vælg dato og tidspunkt</span>
                     </div>
                   </label>
 
@@ -522,10 +522,10 @@ const CheckoutPage = () => {
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
-                      className="bg-gray-50 p-4 rounded-xl space-y-4"
+                      className="bg-black/30 border border-white/10 p-4 rounded-xl space-y-4"
                     >
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-white/80 mb-2">
                           Vælg dato
                         </label>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -537,7 +537,7 @@ const CheckoutPage = () => {
                               className={`p-3 rounded-lg text-sm font-medium transition-all ${
                                 formData.scheduledDate === date.value
                                   ? 'bg-primary text-white'
-                                  : 'bg-white border border-gray-200 hover:border-primary'
+                                  : 'bg-black/20 text-white border border-white/10 hover:border-primary'
                               }`}
                             >
                               {date.label}
@@ -551,7 +551,7 @@ const CheckoutPage = () => {
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                         >
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-white/80 mb-2">
                             Vælg tidspunkt
                           </label>
                           <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 max-h-40 overflow-y-auto">
@@ -563,7 +563,7 @@ const CheckoutPage = () => {
                                 className={`p-2 rounded-lg text-sm font-medium transition-all ${
                                   formData.scheduledTime === time
                                     ? 'bg-primary text-white'
-                                    : 'bg-white border border-gray-200 hover:border-primary'
+                                    : 'bg-black/20 text-white border border-white/10 hover:border-primary'
                                 }`}
                               >
                                 {time}
@@ -574,9 +574,9 @@ const CheckoutPage = () => {
                       )}
 
                       {formData.scheduledDate && formData.scheduledTime && (
-                        <div className="bg-white p-3 rounded-lg border border-green-200 flex items-center gap-2">
-                          <CheckCircle size={18} className="text-green-500" />
-                          <span className="text-sm text-green-700">
+                        <div className="bg-primary/10 p-3 rounded-lg border border-primary/30 flex items-center gap-2">
+                          <CheckCircle size={18} className="text-primary" />
+                          <span className="text-sm text-white">
                             Levering planlagt: {getAvailableDates().find(d => d.value === formData.scheduledDate)?.label} kl. {formData.scheduledTime}
                           </span>
                         </div>
@@ -591,19 +591,19 @@ const CheckoutPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-white rounded-2xl p-6 shadow-lg"
+                className="bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg"
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
                     <CreditCard className="text-primary" size={20} />
                   </div>
-                  <h2 className="text-2xl font-bold text-secondary">
+                  <h2 className="text-2xl font-bold text-white">
                     Betalingsmetode
                   </h2>
                 </div>
 
                 <div className="space-y-3">
-                  <label className="flex items-center gap-4 p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary transition-colors">
+                  <label className="flex items-center gap-4 p-4 border-2 border-white/10 bg-black/20 rounded-xl cursor-pointer hover:border-primary transition-colors">
                     <input
                       type="radio"
                       name="paymentMethod"
@@ -612,15 +612,15 @@ const CheckoutPage = () => {
                       onChange={handleChange}
                       className="w-5 h-5 text-primary"
                     />
-                    <CreditCard size={24} className="text-gray-600" />
-                    <span className="flex-1 font-medium">Kredit/Debitkort</span>
+                    <CreditCard size={24} className="text-primary" />
+                    <span className="flex-1 font-medium text-white">Kredit/Debitkort</span>
                     <div className="flex gap-2">
                       <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" className="h-6" />
                       <img src="https://img.icons8.com/color/48/mastercard.png" alt="Mastercard" className="h-6" />
                     </div>
                   </label>
 
-                  <label className="flex items-center gap-4 p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary transition-colors">
+                  <label className="flex items-center gap-4 p-4 border-2 border-white/10 bg-black/20 rounded-xl cursor-pointer hover:border-primary transition-colors">
                     <input
                       type="radio"
                       name="paymentMethod"
@@ -629,11 +629,11 @@ const CheckoutPage = () => {
                       onChange={handleChange}
                       className="w-5 h-5 text-primary"
                     />
-                    <Phone size={24} className="text-gray-600" />
-                    <span className="flex-1 font-medium">MobilePay</span>
+                    <Phone size={24} className="text-primary" />
+                    <span className="flex-1 font-medium text-white">MobilePay</span>
                   </label>
 
-                  <label className="flex items-center gap-4 p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary transition-colors">
+                  <label className="flex items-center gap-4 p-4 border-2 border-white/10 bg-black/20 rounded-xl cursor-pointer hover:border-primary transition-colors">
                     <input
                       type="radio"
                       name="paymentMethod"
@@ -643,12 +643,12 @@ const CheckoutPage = () => {
                       className="w-5 h-5 text-primary"
                     />
                     <span className="text-2xl">💵</span>
-                    <span className="flex-1 font-medium">Kontant ved levering</span>
+                    <span className="flex-1 font-medium text-white">Kontant ved levering</span>
                   </label>
                 </div>
 
-                <div className="mt-6 flex items-center gap-2 text-sm text-gray-600 bg-green-50 p-4 rounded-xl">
-                  <Lock size={16} className="text-green-600" />
+                <div className="mt-6 flex items-center gap-2 text-sm text-white/70 bg-primary/10 border border-primary/30 p-4 rounded-xl">
+                  <Lock size={16} className="text-primary" />
                   <span>Din betaling er 100% sikker og krypteret</span>
                 </div>
               </motion.div>
@@ -660,9 +660,9 @@ const CheckoutPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="bg-white rounded-2xl p-6 shadow-lg sticky top-32"
+                className="bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg sticky top-32"
               >
-                <h2 className="text-2xl font-bold text-secondary mb-6">
+                <h2 className="text-2xl font-bold text-white mb-6">
                   Din Ordre
                 </h2>
 
@@ -677,8 +677,8 @@ const CheckoutPage = () => {
                           className="w-16 h-16 rounded-lg object-cover"
                         />
                         <div className="flex-1">
-                          <h4 className="font-semibold text-sm">{item.name}</h4>
-                          <p className="text-xs text-gray-500">{item.size}</p>
+                          <h4 className="font-semibold text-sm text-white">{item.name}</h4>
+                          <p className="text-xs text-white/60">{item.size}</p>
                           <p className="text-sm font-bold text-primary">
                             {item.quantity} × {itemPrice.toFixed(0)} kr
                           </p>
@@ -689,8 +689,8 @@ const CheckoutPage = () => {
                 </div>
 
                 {/* Discount Code Section */}
-                <div className="border-t pt-4 mb-4">
-                  <h3 className="font-semibold text-secondary mb-3 flex items-center gap-2">
+                <div className="border-t border-white/10 pt-4 mb-4">
+                  <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
                     <Tag size={18} />
                     Rabatkode
                   </h3>
@@ -700,20 +700,20 @@ const CheckoutPage = () => {
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-xl p-3 mb-3"
+                      className="bg-primary/10 border border-primary/30 rounded-xl p-3 mb-3"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <Gift size={18} className="text-purple-600" />
+                          <Gift size={18} className="text-primary" />
                           <div>
-                            <p className="text-sm font-medium text-purple-900">{savedDiscount.label}</p>
-                            <p className="text-xs text-purple-600">Fra Lykkehjulet!</p>
+                            <p className="text-sm font-medium text-white">{savedDiscount.label}</p>
+                            <p className="text-xs text-white/70">Fra Lykkehjulet!</p>
                           </div>
                         </div>
                         <button
                           type="button"
                           onClick={applySavedDiscount}
-                          className="bg-purple-600 text-white px-3 py-1 rounded-lg text-sm font-medium hover:bg-purple-700"
+                          className="bg-primary text-black px-3 py-1 rounded-lg text-sm font-medium hover:bg-primary/90"
                         >
                           Brug
                         </button>
@@ -732,12 +732,12 @@ const CheckoutPage = () => {
                           setDiscountError('');
                         }}
                         placeholder="Indtast kode"
-                        className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:border-primary focus:outline-none"
+                        className="flex-1 px-3 py-2 border border-white/10 bg-black/30 text-white placeholder:text-white/40 rounded-lg text-sm focus:border-primary focus:outline-none"
                       />
                       <button
                         type="button"
                         onClick={applyDiscountCode}
-                        className="bg-secondary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800"
+                        className="bg-primary text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90"
                       >
                         Anvend
                       </button>
@@ -746,19 +746,19 @@ const CheckoutPage = () => {
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="bg-green-50 border border-green-200 rounded-xl p-3 flex items-center justify-between"
+                      className="bg-primary/10 border border-primary/30 rounded-xl p-3 flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2">
-                        <CheckCircle size={18} className="text-green-600" />
+                        <CheckCircle size={18} className="text-primary" />
                         <div>
-                          <p className="text-sm font-medium text-green-900">{appliedDiscount.label}</p>
-                          <p className="text-xs text-green-600">Kode: {appliedDiscount.code}</p>
+                          <p className="text-sm font-medium text-white">{appliedDiscount.label}</p>
+                          <p className="text-xs text-white/70">Kode: {appliedDiscount.code}</p>
                         </div>
                       </div>
                       <button
                         type="button"
                         onClick={removeDiscount}
-                        className="text-gray-400 hover:text-red-500"
+                        className="text-white/60 hover:text-primary"
                       >
                         <X size={18} />
                       </button>
@@ -766,20 +766,20 @@ const CheckoutPage = () => {
                   )}
                   
                   {discountError && (
-                    <p className="text-red-500 text-xs mt-2">{discountError}</p>
+                    <p className="text-primary text-xs mt-2">{discountError}</p>
                   )}
                 </div>
 
-                <div className="border-t pt-4 space-y-3">
-                  <div className="flex justify-between text-gray-600">
+                <div className="border-t border-white/10 pt-4 space-y-3">
+                  <div className="flex justify-between text-white/70">
                     <span>Subtotal</span>
                     <span className="font-semibold">{subtotal.toFixed(0)} kr</span>
                   </div>
-                  <div className="flex justify-between text-gray-600">
+                  <div className="flex justify-between text-white/70">
                     <span>Levering</span>
                     <span className="font-semibold">
                       {deliveryFee === 0 ? (
-                        <span className="text-green-600">Gratis</span>
+                        <span className="text-primary">Gratis</span>
                       ) : (
                         `${deliveryFee} kr`
                       )}
@@ -789,7 +789,7 @@ const CheckoutPage = () => {
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
-                      className="flex justify-between text-green-600"
+                      className="flex justify-between text-primary"
                     >
                       <span>Rabat ({appliedDiscount.label})</span>
                       <span className="font-semibold">-{discountAmount.toFixed(0)} kr</span>
@@ -797,7 +797,7 @@ const CheckoutPage = () => {
                   )}
                   <div className="border-t pt-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-xl font-bold text-secondary">Total</span>
+                      <span className="text-xl font-bold text-white">Total</span>
                       <span className="text-3xl font-bold text-primary">
                         {total.toFixed(0)} kr
                       </span>
@@ -815,7 +815,7 @@ const CheckoutPage = () => {
                   Gennemfør Bestilling
                 </motion.button>
 
-                <p className="text-xs text-gray-500 text-center mt-4">
+                <p className="text-xs text-white/60 text-center mt-4">
                   Ved at gennemføre bestillingen accepterer du vores{' '}
                   <a href="#" className="text-primary hover:underline">
                     vilkår og betingelser
